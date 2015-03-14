@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe Hydraulik::Types do
+describe Hydraulik::Type do
 end

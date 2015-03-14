@@ -1,8 +1,7 @@
+require 'hydraulik_types'
+require 'vote_init'
 
 module Hydraulik
-  class Type
-  end
-
   class Component
     crud_operations = %w(list show create edit delete)
 
@@ -16,7 +15,7 @@ module Hydraulik
   class Component::Elements
     attr_reader :elements
 
-    def initialize
+    def init
       @elements = []
     end
 
@@ -32,7 +31,7 @@ module Hydraulik
   class Component::Element
     attr_reader :name
 
-    def initialize(value)
+    def init(value)
       raise ElementError unless value < Hydraulik::Type
       @name = value.name
     end

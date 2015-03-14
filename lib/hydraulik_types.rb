@@ -1,5 +1,5 @@
 module Hydraulik
-  class Types
+  class Type
     def validate(value)
     end
 
@@ -7,7 +7,7 @@ module Hydraulik
     end
   end
 
-  class String < Types
+  class String < Type
     @string_length = 0
     @range = 0..512
     @type   = :text
