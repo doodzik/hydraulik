@@ -3,9 +3,9 @@ require 'vote_init'
 
 module Hydraulik
   class Component
-    crud_operations = %w(list show create edit delete)
+    Operations = %w(list show create edit delete)
 
-    crud_operations.each do |name|
+    Operations.each do |name|
       define_singleton_method name.to_sym do
         eval("@#{name} ||= Elements.new")
       end

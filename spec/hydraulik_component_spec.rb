@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Hydraulik::Component do
   it 'adds instance variable list if list is run' do
-    expect(described_class.instance_variables).to eql([])
+    expect(described_class.instance_variables).to_not include(:@list)
     described_class.list
-    expect(described_class.instance_variables).to eql([:@list])
+    expect(described_class.instance_variables).to include(:@list)
   end
 
   it 'uses the same list object' do
