@@ -33,7 +33,7 @@ module Hydraulik
 
     def init(value)
       raise ElementError unless value < Hydraulik::Type
-      @name = value.name
+      @name = value
     end
   end
 end

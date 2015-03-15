@@ -26,7 +26,7 @@ describe Hydraulik do
   describe Hydraulik::Component::Element do
     it 'returns class name when of Hydraulik::Type' do
       TestClass = Class.new(Hydraulik::Type)
-      expect(described_class.new(TestClass).name).to eq('TestClass')
+      expect(described_class.new(TestClass).name).to eq(TestClass)
       Object.send(:remove_const, :TestClass)
     end
 
@@ -37,4 +37,3 @@ describe Hydraulik do
     end
   end
 end
-
