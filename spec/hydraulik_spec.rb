@@ -12,12 +12,13 @@ describe Hydraulik do
       allow(Hydraulik::Component::Element).to receive(:new).with(2).and_return 2
       list << 1
       list << 2
-      expect(list.elements).to eql([1,2])
+      expect(list.elements).to match_array([1, 2])
     end
 
     it 'before pushing onto elements runs value through List Element' do
       list = described_class.new
-      expect(Hydraulik::Component::Element).to receive(:new).with(1).and_return 2
+      expect(Hydraulik::Component::Element)
+        .to receive(:new).with(1).and_return 2
       list << 1
       expect(list.elements).to eql([2])
     end

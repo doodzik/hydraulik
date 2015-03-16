@@ -3,11 +3,13 @@ require 'vote_init'
 
 module Hydraulik
   class Component
-    Operations = %w(list show create edit delete)
+    OPERATIONS = %w(list show create edit delete)
 
-    Operations.each do |name|
+    OPERATIONS.each do |name|
       define_singleton_method name.to_sym do
-        eval("@#{name} ||= Elements.new")
+        instance_variable = "@#{name}".to_sym
+        value = instance_variable_get(instance_variable) || Elements.new
+        instance_variable_set instance_variable, value
       end
     end
   end
@@ -32,9 +34,8 @@ module Hydraulik
     attr_reader :name
 
     def init(value)
-      raise ElementError unless value < Hydraulik::Type
+      fail ElementError unless value < Hydraulik::Type
       @name = value
     end
   end
 end
-
