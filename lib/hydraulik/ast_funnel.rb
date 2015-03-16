@@ -6,7 +6,7 @@ module Hydraulik
     # funnels all components in current namespace into an array
     class Funnel < Array
       def init
-        concat! collect_components
+        concat Funnel.collect_components
       end
 
       def self.collect_components

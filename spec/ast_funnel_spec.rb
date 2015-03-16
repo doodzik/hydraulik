@@ -8,7 +8,9 @@ describe Hydraulik::AST::Funnel do
     GC.start
     TestComponent  = Class.new(Hydraulik::DSL::Component)
     TestComponent1 = Class.new(Hydraulik::DSL::Component)
-    expect(Hydraulik::AST::Funnel.collect_components)
+    expect(described_class.collect_components)
+      .to contain_exactly(TestComponent1, TestComponent)
+    expect(described_class.new)
       .to contain_exactly(TestComponent1, TestComponent)
     Object.send(:remove_const, :TestComponent)
     Object.send(:remove_const, :TestComponent1)
