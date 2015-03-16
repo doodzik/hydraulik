@@ -14,13 +14,13 @@ describe Hydraulik::DSL::Elements do
 end
 
 describe Hydraulik::DSL::Element do
-
   it '#valid? fails if not a DSL::Type Class' do
     expect(described_class.new(Class.new(Object)).valid?).to be false
   end
 
   it '#valid? succeeds if DSL::Type Class' do
-    expect(described_class.new(Class.new(Hydraulik::DSL::Type)).valid?).to be true
+    expect(described_class.new(Class.new(Hydraulik::DSL::Type)).valid?)
+      .to be true
   end
 
   it '#validate succeeds returns nil' do

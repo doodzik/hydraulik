@@ -11,6 +11,7 @@ module Hydraulik
       end
     end
 
+    # Validates an element of the class Elements
     class Element < Struct.new(:element)
       def validate!
         fail DSL::ElementError unless valid?

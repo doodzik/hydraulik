@@ -1,5 +1,6 @@
 module Hydraulik
   module DSL
+    # Implements the Component DSL implementation
     class Component
       OPERATIONS = %w(list show create edit delete)
 
