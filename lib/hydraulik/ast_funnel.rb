@@ -3,10 +3,10 @@ require 'vote_init'
 
 module Hydraulik
   module AST
-    # funnels all components in current namespace into an array[TODO]
-    class Funnel
+    # funnels all components in current namespace into an array
+    class Funnel < Array
       def init
-        @components = collect_components
+        concat! collect_components
       end
 
       def self.collect_components
