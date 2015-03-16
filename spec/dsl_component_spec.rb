@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'hydraulik/dsl_component'
 
-describe Hydraulik::Component do
+describe Hydraulik::DSL::Component do
   it 'adds instance variable list if list is run' do
     expect(described_class.instance_variables).to_not include(:@list)
     described_class.list
