@@ -3,29 +3,28 @@ require 'vote_init'
 
 module Hydraulik
   module DSL
-    class Elements
-      attr_reader :elements
-
-      def init
-        @elements = []
-      end
-
-      def <<(value)
-        value = DSL::Element.new(value)
-        @elements << value
+    # holds elements for each operation
+    class Elements < Array
+      def <<(element)
+        Element.new(element).validate!
+        super
       end
     end
 
+    class Element < Struct.new(:element)
+      def validate!
+        fail DSL::ElementError unless valid?
+      end
+
+      def valid?
+        # the false added at the end because
+        # element < Hydraulik::DSL::Type returns nil if false
+        element.class == Class && element < Hydraulik::DSL::Type || false
+      end
+    end
+
+    # error for when const isnt of DSL::Type
     class ElementError < StandardError
-    end
-
-    class Element
-      attr_reader :name
-
-      def init(value)
-        fail DSL::ElementError unless value < Hydraulik::DSL::Type
-        @name = value
-      end
     end
   end
 end
