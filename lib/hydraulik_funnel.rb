@@ -4,7 +4,7 @@ require 'vote_init'
 module Hydraulik
   class Funnel
     def init
-      @components = self.collect_components
+      @components = collect_components
     end
 
     def self.collect_components
@@ -24,14 +24,14 @@ module Hydraulik
 
     def operations
       @component.instance_variables
-      .collect { |v| v.slice 1, 6 }
-      .select  { |v| Component::Operations.include? v }
+        .collect { |v| v.slice 1, 6 }
+        .select  { |v| Component::OPERATIONS.include? v }
     end
   end
 
-  class Component::Expender::Ast
+  class Component::Expender::Ast < Hash
     def init(operations)
-      @structure = Hash[operations.map {|o| [o.to_sym, {}]}]
+      operations.map { |o| self[o.to_sym] = {} }
     end
   end
 end

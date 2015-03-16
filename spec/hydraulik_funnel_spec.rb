@@ -18,7 +18,7 @@ describe Hydraulik::Component::Expender do
     TestComponent.instance_variable_set :@hi, ''
     TestComponent.instance_variable_set :@delete, ''
     expender = described_class.new(TestComponent)
-    expect(expender.send(:operations)).to match_array(%w[show delete])
+    expect(expender.send(:operations)).to match_array(%w(show delete))
     Object.send(:remove_const, :TestComponent)
   end
 end
@@ -30,15 +30,14 @@ describe Hydraulik::Component::Expender do
     TestComponent.instance_variable_set :@hi, ''
     TestComponent.instance_variable_set :@delete, ''
     expender = described_class.new(TestComponent)
-    expect(expender.send(:operations)).to match_array(%w[show delete])
+    expect(expender.send(:operations)).to match_array(%w(show delete))
     Object.send(:remove_const, :TestComponent)
   end
 end
 
 describe Hydraulik::Component::Expender::Ast do
   it 'gets present crud operations' do
-    ast = described_class.new(['a', 'b'])
-    expect(ast.instance_variable_get :@structure).to match({ a: {}, b: {} })
+    ast = described_class.new %w(a b)
+    expect(ast).to match(a: {}, b: {})
   end
 end
-
