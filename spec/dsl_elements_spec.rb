@@ -6,7 +6,7 @@ describe Hydraulik::DSL::Elements do
     list = described_class.new
     element = double 'element'
     allow(Hydraulik::DSL::Element).to receive(:new) { element }
-    expect(element).to receive(:validate!).twice
+    expect(element).to receive(:validate).twice
     list << 1
     list << 2
     expect(list).to match_array([1, 2])
@@ -26,12 +26,12 @@ describe Hydraulik::DSL::Element do
   it '#validate succeeds returns nil' do
     element = described_class.new('')
     allow(element).to receive(:valid?).and_return true
-    expect(element.validate!).to be nil
+    expect(element.validate).to be nil
   end
 
   it '#validate fails raises error' do
     element = described_class.new('')
     allow(element).to receive(:valid?).and_return false
-    expect { element.validate! }.to raise_error(StandardError)
+    expect { element.validate }.to raise_error(StandardError)
   end
 end

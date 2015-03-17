@@ -13,8 +13,8 @@ module Hydraulik
 
       def operations
         @component.instance_variables
-          .collect { |v| v.slice 1, 6 }
-          .select  { |v| DSL::Component::OPERATIONS.include? v }
+          .collect { |comp| comp.slice 1, 6 }
+          .select  { |comp| DSL::Component::OPERATIONS.include? comp }
       end
     end
   end

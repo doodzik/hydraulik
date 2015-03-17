@@ -6,14 +6,14 @@ module Hydraulik
     # holds elements for each operation
     class Elements < Array
       def <<(element)
-        Element.new(element).validate!
+        Element.new(element).validate
         super
       end
     end
 
     # Validates an element of the class Elements
     class Element < Struct.new(:element)
-      def validate!
+      def validate
         fail DSL::ElementError unless valid?
       end
 
