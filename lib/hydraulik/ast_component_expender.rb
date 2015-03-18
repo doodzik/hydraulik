@@ -5,6 +5,7 @@ require 'vote_init'
 module Hydraulik
   module AST
     # Takes a DSL::Component and expands its informations
+    # TODO: rename Component
     class ComponentExpender
       def init(component)
         @component  = component
