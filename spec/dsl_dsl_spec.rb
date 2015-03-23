@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'hydraulik/ast_funnel'
+require 'hydraulik/dsl_dsl'
 
-describe Hydraulik::AST::Funnel do
+describe Hydraulik::DSL::DSL do
   it 'collects all components in namespace when initialized' do
     # Trigger GC because a anonymous DSL::Component Class child
     # is added to the ObjectSpace in the it block

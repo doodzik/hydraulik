@@ -19,8 +19,10 @@ describe Hydraulik::AST::OperationStructure do
 
   it '#field returns a field object' do
     ast = described_class.new
-    expect(ast.field)
-      .to be_an_instance_of Hydraulik::AST::FieldStructure
+    expect { |b| ast.field(&b) }
+      .to yield_with_args(Hydraulik::AST::FieldStructure)
     expect(ast).to match(fields: [{}])
+    expect(ast[:fields][0])
+      .to be_an_instance_of Hydraulik::AST::FieldStructure
   end
 end

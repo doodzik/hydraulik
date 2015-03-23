@@ -6,6 +6,8 @@ module Hydraulik
   module AST
     # Takes a DSL::Component and expands its informations
     # TODO: rename Component
+    # TODO: The ties of this class to other are weired
+    #       clean it up -> Restructure
     class ComponentExpender
       def init(component)
         @component  = component

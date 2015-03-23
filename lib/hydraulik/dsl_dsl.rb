@@ -2,16 +2,16 @@ require 'hydraulik/dsl_component'
 require 'vote_init'
 
 module Hydraulik
-  module AST
+  module DSL
     # funnels all components in current namespace into an array
-    class Funnel < Array
+    class DSL < Array
       def init
-        concat Funnel.collect_components
+        concat DSL.collect_components
       end
 
       def self.collect_components
         ObjectSpace.each_object(Class).select do |klass|
-          klass < DSL::Component
+          klass < Hydraulik::DSL::Component
         end
       end
     end

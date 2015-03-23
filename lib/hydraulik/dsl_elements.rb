@@ -12,7 +12,12 @@ module Hydraulik
     end
 
     # Validates an element of the class Elements
-    class Element < Struct.new(:element)
+    class Element
+      # not init because rubocop wines
+      def initialize(value)
+        @element = value
+      end
+
       def validate
         fail DSL::ElementError unless valid?
       end
@@ -20,7 +25,7 @@ module Hydraulik
       def valid?
         # the false added at the end because
         # element < Hydraulik::DSL::Type returns nil if false
-        element.class == Class && element < Hydraulik::DSL::Type || false
+        @element.class == Class && @element < Hydraulik::DSL::Type || false
       end
     end
 

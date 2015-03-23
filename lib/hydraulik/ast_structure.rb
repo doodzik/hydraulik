@@ -4,23 +4,16 @@ module Hydraulik
   module AST
     # Generates the Structure of the AST
     class Structure < Hash
+      # TODO: mv init to parser
       def init(operations)
         operations.map do |operation|
           self[operation.to_sym] = AST::OperationStructure.new
         end
       end
-
-      # def valid?
-      #   has all fields assigned
-      # end
     end
 
     # The structure for a operation
     class OperationStructure < Hash
-      # def valid?
-      #   has all fields assigned
-      # end
-
       def route(route)
         self[:route] = route
         self
@@ -28,8 +21,8 @@ module Hydraulik
 
       def field
         field = AST::FieldStructure.new
+        yield field
         (self[:fields] ||= []) << field
-        field
       end
     end
 
