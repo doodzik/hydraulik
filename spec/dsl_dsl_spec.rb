@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'hydraulik/dsl_dsl'
+require 'hydraulik/dsl/dsl'
 
 describe Hydraulik::DSL::DSL do
   it 'collects all components in namespace when initialized' do

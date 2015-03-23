@@ -1,13 +1,13 @@
 require 'vote_init'
 
 module Hydraulik
-  module AST
+  module Parser
     # Generates the Structure of the AST
     class Structure < Hash
       # TODO: mv init to parser
       def init(operations)
         operations.map do |operation|
-          self[operation.to_sym] = AST::OperationStructure.new
+          self[operation.to_sym] = Hydraulik::Parser::OperationStructure.new
         end
       end
     end
@@ -20,7 +20,7 @@ module Hydraulik
       end
 
       def field
-        field = AST::FieldStructure.new
+        field = Hydraulik::Parser::FieldStructure.new
         yield field
         (self[:fields] ||= []) << field
       end

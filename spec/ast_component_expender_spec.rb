@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'hydraulik/ast_component_expender'
+require 'hydraulik/parser/component_expender'
 
-describe Hydraulik::AST::ComponentExpender do
+describe Hydraulik::Parser::ComponentExpender do
   it 'gets present crud operations' do
     TestComponent  = Class.new(Hydraulik::DSL::Component)
     TestComponent.instance_variable_set :@show, ''

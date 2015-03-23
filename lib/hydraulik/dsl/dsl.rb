@@ -1,4 +1,4 @@
-require 'hydraulik/dsl_component'
+require 'hydraulik/dsl/component'
 require 'vote_init'
 
 module Hydraulik

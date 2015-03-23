@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'hydraulik/dsl_elements'
+require 'hydraulik/dsl/elements'
 
 describe Hydraulik::DSL::Elements do
   it 'pushes element onto elements' do

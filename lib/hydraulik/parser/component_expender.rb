@@ -1,9 +1,9 @@
-require 'hydraulik/dsl_component'
-require 'hydraulik/ast_structure'
+require 'hydraulik/dsl/component'
+require 'hydraulik/parser/structure'
 require 'vote_init'
 
 module Hydraulik
-  module AST
+  module Parser
     # Takes a DSL::Component and expands its informations
     # TODO: rename Component
     # TODO: The ties of this class to other are weired
@@ -11,7 +11,7 @@ module Hydraulik
     class ComponentExpender
       def init(component)
         @component  = component
-        @operations = AST::Structure.new(operations)
+        @operations = Hydraulik::Parser::Structure.new(operations)
       end
 
       def operations

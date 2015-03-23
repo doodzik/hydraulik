@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'hydraulik/parser_parser'
+require 'hydraulik/parser/parser'
 
 describe Hydraulik::Parser::Parser do
 end

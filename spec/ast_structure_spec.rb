@@ -1,16 +1,16 @@
 require 'spec_helper'
-require 'hydraulik/ast_structure'
+require 'hydraulik/parser/structure'
 
-describe Hydraulik::AST::Structure do
+describe Hydraulik::Parser::Structure do
   it 'gets present crud operations' do
     ast = described_class.new %w(a b)
     expect(ast).to match(a: {}, b: {})
     expect(ast[:a])
-      .to be_an_instance_of Hydraulik::AST::OperationStructure
+      .to be_an_instance_of Hydraulik::Parser::OperationStructure
   end
 end
 
-describe Hydraulik::AST::OperationStructure do
+describe Hydraulik::Parser::OperationStructure do
   it '#route sets route' do
     ast = described_class.new
     ast.route('route')
@@ -20,9 +20,9 @@ describe Hydraulik::AST::OperationStructure do
   it '#field returns a field object' do
     ast = described_class.new
     expect { |b| ast.field(&b) }
-      .to yield_with_args(Hydraulik::AST::FieldStructure)
+      .to yield_with_args(Hydraulik::Parser::FieldStructure)
     expect(ast).to match(fields: [{}])
     expect(ast[:fields][0])
-      .to be_an_instance_of Hydraulik::AST::FieldStructure
+      .to be_an_instance_of Hydraulik::Parser::FieldStructure
   end
 end

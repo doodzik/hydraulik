@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'hydraulik/dsl_component'
+require 'hydraulik/dsl/component'
 
 describe Hydraulik::DSL::Component do
   it 'adds instance variable list if list is run' do
