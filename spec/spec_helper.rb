@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
-if ENV['TEST_SOURCE'] == 'rake'
+if ENV['TEST_TYPE'] == 'rake'
   require 'simplecov'
   SimpleCov.start
   SimpleCov.minimum_coverage 95
