@@ -1,13 +1,11 @@
 {
   "name": "hydraulik",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
-  "main": "./lib/hydraulik.js",
+  "main": "",
   "private": true,
   "scripts": {
-    "start": "./bin/startup.sh",
-    "test": "jest",
-    "webpack": "webpack"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,30 +18,13 @@
   },
   "homepage": "https://github.com/doodzik/void#readme",
   "dependencies": {
-    "flux": "^2.0.3",
-    "keymirror": "^0.1.1",
-    "koa": "^0.20.0",
-    "koa-route": "^2.4.1",
-    "koa-static-cache": "^3.1.1",
-    "normalize.css": "^3.0.3",
-    "object-assign": "^2.0.0",
-    "react": "^0.13.3",
-    "react-router": "^0.13.3",
-    "react-tools": "^0.13.3",
-    "superagent": "^1.2.0"
+    "object-assign": "^2.0.0"
   },
   "devDependencies": {
-    "babel-core": "^5.4.2",
-    "babel-jest": "^5.2.0",
-    "babel-loader": "^5.1.0",
+    "babel": "^5.4.7",
     "coffee-script": "^1.9.2",
-    "css-loader": "^0.12.1",
     "jest-cli": "^0.4.5",
-    "jshint": "^2.7.0",
-    "node-libs-browser": "^0.5.0",
-    "style-loader": "^0.12.2",
-    "stylus-loader": "^1.1.1",
-    "webpack": "^1.9.6"
+    "jshint": "^2.7.0"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
