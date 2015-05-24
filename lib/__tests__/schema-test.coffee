@@ -12,12 +12,6 @@ describe 'Schema', ->
     schema = new Schema('Name')
     expect(schema.name).toEqual('Name')
 
-  it '#store sets the store', ->
-    schema = new Schema('')
-    expect(schema.Store).toEqual('local')
-    schema.store('server')
-    expect(schema.Store).toEqual('server')
-
   it '#type adds new type', ->
     schema = new Schema('')
     expect(schema.types).toEqual []

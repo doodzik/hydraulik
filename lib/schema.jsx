@@ -7,7 +7,6 @@ import NullCrud  from './crud/null'
 export default class Schema {
   constructor(name) {
     this.name     = name
-    this.Store    = 'local'
     this.types    = []
     this.Create, this.Read, this.Update, this.Destroy = new NullCrud()
   }
@@ -25,33 +24,29 @@ export default class Schema {
     return this
   }
 
-  store(store) {
-    this.Store = store
-  }
-
   create(cb){
-    this.Create = new Create(this.name)
+    this.Create = new Create(this)
     if(typeof(cb) == 'function')
       cb(this.Create)
     return this
   }
 
   read(cb){
-    this.Read = new Read()
+    this.Read = new Read(this)
     if(typeof(cb) == 'function')
       cb(this.Read)
     return this
   }
 
   update(cb){
-    this.Update = new Update(this.name)
+    this.Update = new Update(this)
     if(typeof(cb) == 'function')
       cb(this.Update)
     return this
   }
 
   destroy(cb){
-    this.Destroy = new Destroy(this.name)
+    this.Destroy = new Destroy(this)
     if(typeof(cb) == 'function')
       cb(this.Destroy)
     return this

@@ -1,14 +1,18 @@
 export default class Destroy {
-  constructor(schemaName){
+  constructor(schema){
     this.crudType   = 'destroy'
-    this.actionType = schemaName + '_DESTROY'
+    this.actionType = schema.name + '_DESTROY'
   }
 
   matches(actionType){
     return actionType == this.actionType
   }
-  
+
   exists(){
     return true
+  }
+
+  run(store, argObj) {
+
   }
 }

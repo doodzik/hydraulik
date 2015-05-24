@@ -1,7 +1,7 @@
 export default class Create {
-  constructor(schemaName){
+  constructor(schema){
     this.crudType   = 'create'
-    this.actionType = schemaName + '_CREATE'
+    this.actionType = schema.name + '_CREATE'
   }
 
   matches(actionType){
@@ -10,5 +10,9 @@ export default class Create {
 
   exists(){
     return true
+  }
+
+  run(store, argObj) {
+
   }
 }

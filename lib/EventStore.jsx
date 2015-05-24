@@ -3,7 +3,7 @@ import assign           from 'object-assign'
 
 var CHANGE_EVENT = 'change'
 
-export var EventStore = assign({}, EventEmitter.prototype, {
+export default assign({}, EventEmitter.prototype, {
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
