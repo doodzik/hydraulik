@@ -12,13 +12,11 @@ describe('CheckboxWithLabel', function() {
     );
 
     // Verify that it's Off by default
-    var label = TestUtils.findRenderedDOMComponentWithTag(
-      checkbox, 'label');
+    var label = TestUtils.findRenderedDOMComponentWithTag(checkbox, 'label');
     expect(label.getDOMNode().textContent).toEqual('Off');
 
     // Simulate a click and verify that it is now On
-    var input = TestUtils.findRenderedDOMComponentWithTag(
-      checkbox, 'input');
+    var input = TestUtils.findRenderedDOMComponentWithTag(checkbox, 'input');
     TestUtils.Simulate.change(input);
     expect(label.getDOMNode().textContent).toEqual('On');
   });
