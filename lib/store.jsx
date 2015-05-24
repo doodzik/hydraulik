@@ -2,7 +2,8 @@ export default class Store {
   constructor(schema) {
     this.schema = schema
     this.store  = []
-    this.actionType = schema.name + '_CREATE'
+    this.name   = schema.name
+    this.actionType = this.name + '_CREATE'
   }
 
   read(){

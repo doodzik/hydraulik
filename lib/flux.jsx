@@ -24,4 +24,30 @@ export default class Flux {
     })
   }
 
+  getStateObj(){
+    var obj = {}
+    obj[this.store.name] = this.store.read()
+    return obj
+  }
+
+  mixin(__this){
+    var _this = this
+    return {
+      getInitialState: function() {
+        return _this.getStateObj()
+      },
+
+      componentDidMount: function() {
+        _this.events.addChangeListener(__this._onChange);
+      },
+
+      componentWillUnmount: function() {
+        _this.events.removeChangeListener(__this._onChange);
+      },
+
+      _onChange: function() {
+        __this.setState(_this.getStateObj());
+      }
+    }
+  }
 }

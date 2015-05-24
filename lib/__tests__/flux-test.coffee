@@ -40,3 +40,40 @@ describe 'Flux', ->
     expect(flux.dispatcher.dispatch).toBeCalledWith
        actionType: 'actionType',
        argObj: 'argObj'
+
+  it '#getStateObj', ->
+    dispatcher = { dispatch: jest.genMockFn(), register: jest.genMockFn() }
+    store = new Store()
+    store.name = 'Name'
+    store.read.mockReturnValue('value')
+    flux = new Flux(store, dispatcher)
+    expect(flux.getStateObj()).toEqual
+      Name: 'value'
+
+  describe '#mixin', ->
+    dispatcher = { dispatch: jest.genMockFn(), register: jest.genMockFn() }
+    store = new Store()
+    store.name = 'Name'
+    store.read.mockReturnValue('value')
+    flux = new Flux(store, dispatcher)
+    it '#getInitialState', ->
+      mixin = flux.mixin({})
+      expect(mixin.getInitialState()).toEqual flux.getStateObj()
+
+    it '#componentDidMount', ->
+        _this = { setState: jest.genMockFn() }
+        mixin = flux.mixin(_this)
+        mixin.componentDidMount()
+        expect(flux.events.addChangeListener).toBeCalledWith mixin._onChange
+
+    it '#componentWillUnmount', ->
+        _this = { setState: jest.genMockFn() }
+        mixin = flux.mixin(_this)
+        mixin.componentWillUnmount()
+        expect(flux.events.removeChangeListener).toBeCalledWith mixin._onChange
+
+    it '#_onChange', ->
+      _this = { setState: jest.genMockFn() }
+      mixin = flux.mixin(_this)
+      mixin._onChange()
+      expect(_this.setState).toBeCalledWith flux.getStateObj()
