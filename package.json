@@ -24,7 +24,8 @@
     "babel": "^5.4.7",
     "coffee-script": "^1.9.2",
     "jest-cli": "^0.4.5",
-    "jshint": "^2.7.0"
+    "jshint": "^2.7.0",
+    "react": "^0.13.3"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
