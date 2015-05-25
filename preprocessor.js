@@ -1,6 +1,6 @@
 // preprocessor.js
 var coffee = require('coffee-script')
-var babel  = require("babel")
+var babel  = require('babel')
 
 module.exports = {
   process: function(src, path) {
@@ -12,4 +12,4 @@ module.exports = {
       return babel.transform(src).code
     }
   }
-};
+}

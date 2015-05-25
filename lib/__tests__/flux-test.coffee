@@ -76,5 +76,5 @@ describe 'Flux', ->
     it '#_onChange', ->
       _this = { setState: jest.genMockFn() }
       mixin = flux.mixin()
-      assign(_this, mixin)._onChange()
+      assign(_this, mixin)['_Name_change']()
       expect(_this.setState).toBeCalledWith flux.getStateObj()

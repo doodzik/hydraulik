@@ -32,22 +32,25 @@ export default class Flux {
 
   mixin(){
     var _this = this
-    return {
+    var onChangeFn = '_' + this.store.name + '_change'
+    var obj = {
       getInitialState: function() {
         return _this.getStateObj()
       },
 
-      _onChange: function() {
-         this.setState(_this.getStateObj());
-      },
-
       componentDidMount: function() {
-        _this.events.addChangeListener(this._onChange);
+        _this.events.addChangeListener(this[onChangeFn]);
       },
 
       componentWillUnmount: function() {
-        _this.events.removeChangeListener(this._onChange);
+        _this.events.removeChangeListener(this[onChangeFn]);
       }
     }
+
+    obj[onChangeFn] = function() {
+       this.setState(_this.getStateObj());
+    }
+
+    return obj
   }
 }
