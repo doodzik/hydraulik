@@ -1,24 +1,33 @@
-var React = require('react/addons');
+import React      from 'react/addons'
+import dispatcher from './dispatcher'
+import { Schema, Store, Flux } from '../lib/hydraulik'
 
-var CheckboxWithLabel = React.createClass({
-  getInitialState: function() {
-    return { isChecked: false };
+var schema = new Schema('Names')
+var Names  = new Flux(new Store(schema), dispatcher)
+
+Names.create('First')
+
+export default CheckboxWithLabel = React.createClass({
+  mixins: [Names.mixin()],
+
+  onClick: function() {
+    Names.create('Second')
   },
-  onChange: function() {
-    this.setState({isChecked: !this.state.isChecked});
-  },
+
   render: function() {
+    var names = this.state.Names
+    var lis   = names.map(function(name, index){
+      return(
+        <li key={index}>{name}</li>
+      )
+    })
     return (
-      <label>
-        <input
-          type="checkbox"
-          checked={this.state.isChecked}
-          onChange={this.onChange}
-        />
-        {this.state.isChecked ? this.props.labelOn : this.props.labelOff}
-      </label>
-    );
+      <div>
+        <ul>
+          { lis }
+        </ul>
+        <button onClick={this.onClick} />
+      </div>
+    )
   }
-});
-
-module.exports = CheckboxWithLabel;
+})

@@ -6,7 +6,7 @@ export default class Flux {
     this.store      = store
     this.dispatcher = dispatcher
     this.events     = assign({}, EventStore)
-    dispatcher.register(this.register)
+    dispatcher.register(this.register.bind(this))
   }
 
   register(action){
@@ -30,23 +30,23 @@ export default class Flux {
     return obj
   }
 
-  mixin(__this){
+  mixin(){
     var _this = this
     return {
       getInitialState: function() {
         return _this.getStateObj()
       },
 
+      _onChange: function() {
+         this.setState(_this.getStateObj());
+      },
+
       componentDidMount: function() {
-        _this.events.addChangeListener(__this._onChange);
+        _this.events.addChangeListener(this._onChange);
       },
 
       componentWillUnmount: function() {
-        _this.events.removeChangeListener(__this._onChange);
-      },
-
-      _onChange: function() {
-        __this.setState(_this.getStateObj());
+        _this.events.removeChangeListener(this._onChange);
       }
     }
   }

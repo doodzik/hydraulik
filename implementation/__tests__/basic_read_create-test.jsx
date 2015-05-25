@@ -1,23 +1,20 @@
-jest.dontMock('../basic_read_create')
+jest.autoMockOff()
+
+var React = require('react/addons')
+var BasicReadCreate = require('../basic_read_create')
+var TestUtils = React.addons.TestUtils;
 
 describe('CheckboxWithLabel', function() {
   it('changes the text after click', function() {
-    var React = require('react/addons');
-    var CheckboxWithLabel = require('../basic_read_create');
-    var TestUtils = React.addons.TestUtils;
+    var basicReadCreate = TestUtils.renderIntoDocument(<BasicReadCreate />)
 
-    // Render a checkbox with label in the document
-    var checkbox = TestUtils.renderIntoDocument(
-      <CheckboxWithLabel labelOn="On" labelOff="Off" />
-    );
+    var ul = TestUtils.findRenderedDOMComponentWithTag(basicReadCreate, 'ul')
+    expect(ul.getDOMNode().textContent).toEqual('First')
 
-    // Verify that it's Off by default
-    var label = TestUtils.findRenderedDOMComponentWithTag(checkbox, 'label');
-    expect(label.getDOMNode().textContent).toEqual('Off');
+    var input = TestUtils.findRenderedDOMComponentWithTag(basicReadCreate, 'button')
+    TestUtils.Simulate.click(input)
 
-    // Simulate a click and verify that it is now On
-    var input = TestUtils.findRenderedDOMComponentWithTag(checkbox, 'input');
-    TestUtils.Simulate.change(input);
-    expect(label.getDOMNode().textContent).toEqual('On');
-  });
-});
+    var ul = TestUtils.findRenderedDOMComponentWithTag(basicReadCreate, 'ul')
+    expect(ul.getDOMNode().textContent).toEqual('FirstSecond')
+  })
+})
