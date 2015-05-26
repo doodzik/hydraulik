@@ -1,11 +1,10 @@
-import assign     from 'object-assign'
 import EventStore from './EventStore'
 
 export default class Flux {
   constructor(store, dispatcher) {
     this.store      = store
     this.dispatcher = dispatcher
-    this.events     = assign({}, EventStore)
+    this.events     = Object.assign({}, EventStore)
     dispatcher.register(this.register.bind(this))
   }
 

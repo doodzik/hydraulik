@@ -21,14 +21,14 @@ export default class Store {
   // TODO: shorten this method
   validate(arg) {
     return Promise.reduce(this.schema.types, (typeErrors, type) => {
-      return Promise.try(function() {
+      return Promise.try(() => {
         new type.type(arg[type.name]).validate()
-        return '';
+        return ''
       })
-      .catch(function(e){
+      .catch((e) => {
         return e.message
       })
-      .then(function(message) {
+      .then((message) => {
         typeErrors[type.name] = message
         return typeErrors
       })

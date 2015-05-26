@@ -1,6 +1,6 @@
 // preprocessor.js
 var coffee = require('coffee-script')
-var babel  = require('babel')
+var babel  = require('babel-core')
 
 module.exports = {
   process: function(src, path) {
@@ -9,7 +9,7 @@ module.exports = {
     } else if (coffee.helpers.isCoffee(path)) {
       return coffee.compile(src, {'bare': true})
     } else {
-      return babel.transform(src).code
+      return babel.transform(src, { optional: ["runtime"] }).code
     }
   }
 }
