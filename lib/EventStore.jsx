@@ -1,9 +1,10 @@
 import { EventEmitter } from 'events'
+import assign from 'object-assign'
 
 var CHANGE_EVENT = 'change'
 var ERROR_EVENT  = 'error'
 
-export default Object.assign({}, EventEmitter.prototype, {
+export default assign({}, EventEmitter.prototype, {
   emitChange: function() {
     this.emit(CHANGE_EVENT)
   },
