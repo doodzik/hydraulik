@@ -3,7 +3,9 @@ export default class Type{
     this.value = value
   }
 
-  validate(){}
+  validate(){
+    return this.validation() || ''
+  }
 
   getClassName() {
     return this.name;

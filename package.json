@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/doodzik/void#readme",
   "dependencies": {
-    "bluebird": "^2.9.26",
     "object-assign": "^2.0.0"
   },
   "devDependencies": {

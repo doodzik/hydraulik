@@ -1,4 +1,3 @@
-import Promise  from 'bluebird'
 import StrError from './types/str-error'
 
 export default class Store {
@@ -20,23 +19,16 @@ export default class Store {
 
   // TODO: shorten this method
   validate(arg) {
-    return Promise.reduce(this.schema.types, (typeErrors, type) => {
-      return Promise.try(() => {
-        new type.type(arg[type.name]).validate()
-        return ''
-      })
-      .catch((e) => {
-        return e.message
-      })
-      .then((message) => {
-        typeErrors[type.name] = message
+    typeErrors = this.schema.types.reduce((typeErrors, type) => {
+        typeErrors[type.name] = new type.type(arg[type.name]).validate()
         return typeErrors
-      })
-    }, {}).then((typeErrors) => {
-      this.error = typeErrors
-      for (var key in typeErrors)
-        typeErrors.hasOwnProperty(key) && new StrError(typeErrors[key]).validate()
-      return typeErrors
-    })
+    }, {})
+    this.error = typeErrors
+    for (var key in typeErrors) {
+      if (typeErrors.hasOwnProperty(key) && new StrError(typeErrors[key]).validate().length > 0)
+        return true
+      else
+        return false
+    }
   }
 }

@@ -8,10 +8,10 @@ export default class Str extends Type {
     this.max = 128
   }
 
-  validate(){
+  validation(){
     if (this.length < this.min)
-      throw new Error('Str is too short')
+      return 'Str is too short'
     if (this.length > this.max)
-      throw new Error('Str is too long')
+      return 'Str is too long'
   }
 }
