@@ -8,25 +8,19 @@ var Names  = new Flux(new Store(schema), dispatcher)
 
 Names.create({ name: 'First'})
 
-export default BasicReadCreate = React.createClass({
-  mixins: [Names.mixin()],
+export default BasicErrorHandling = React.createClass({
+  mixins: [Names.mixinError()],
 
   onClick: function() {
-    Names.create({ name: 'Second' })
+    Names.create({ name: '' })
   },
 
   render: function() {
-    var names = this.state.Name
-    var lis   = names.map(function(name, index){
-      return(
-        <li key={index}>{name.name}</li>
-      )
-    })
     return (
       <div>
-        <ul>
-          { lis }
-        </ul>
+        <span>
+          { this.state.NameError.name }
+        </span>
         <button onClick={this.onClick} />
       </div>
     )

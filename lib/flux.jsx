@@ -11,8 +11,12 @@ export default class Flux {
 
   register(action){
     if(this.store.actionType == action.actionType){
-      this.store.create(action.argObj)
-      this.events.emitChange()
+      if (!this.store.validate(action.argObj)) {
+        this.store.create(action.argObj)
+        this.events.emitChange()
+      } else {
+        this.events.emitError()
+      }
     }
   }
 
@@ -27,6 +31,12 @@ export default class Flux {
   getStateObj(){
     var obj = {}
     obj[this.store.name] = this.store.read()
+    return obj
+  }
+
+  getStateObjError(){
+    var obj = {}
+    obj[this.store.name + 'Error'] = this.store.error
     return obj
   }
 
@@ -49,6 +59,30 @@ export default class Flux {
 
     obj[onChangeFn] = function() {
        this.setState(_this.getStateObj());
+    }
+
+    return obj
+  }
+
+  mixinError(){
+    var _this = this
+    var onErrorFn = '_' + this.store.name + '_error'
+    var obj = {
+      getInitialState: function() {
+        return _this.getStateObjError()
+      },
+
+      componentDidMount: function() {
+        _this.events.addErrorListener(this[onErrorFn]);
+      },
+
+      componentWillUnmount: function() {
+        _this.events.removeErrorListener(this[onErrorFn]);
+      }
+    }
+
+    obj[onErrorFn] = function() {
+       this.setState(_this.getStateObjError());
     }
 
     return obj
