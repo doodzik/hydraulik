@@ -1,9 +1,13 @@
-import Str from './str'
+import Type from '../type'
 
-export default class StrError extends Str {
-  constructor(value){
-    super(value)
-    this.min = 0
-    this.max = 0
+export default class StrError extends Type {
+  constructor(value, options = {}){
+    super(value, options)
+    this.length = value.length
+  }
+
+  validation(){
+    if (this.length != 0)
+      return 'StrError: value should be of length 0'
   }
 }

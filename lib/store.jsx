@@ -17,18 +17,15 @@ export default class Store {
     this.store.push(arg)
   }
 
-  // TODO: shorten this method
-  validate(arg) {
-    typeErrors = this.schema.types.reduce((typeErrors, type) => {
-        typeErrors[type.name] = new type.type(arg[type.name]).validate()
+  // return true if no error else falso
+  validate(arg: Object): Boolean {
+    var isValid = true
+    this.error = this.schema.types.reduce((typeErrors, type) => {
+        var typeInstance = new type.type(arg[type.name])
+        typeErrors[type.name] = typeInstance.validate()
+        isValid = new StrError(typeInstance).isValid()
         return typeErrors
     }, {})
-    this.error = typeErrors
-    for (var key in typeErrors) {
-      if (typeErrors.hasOwnProperty(key) && new StrError(typeErrors[key]).validate().length > 0)
-        return true
-      else
-        return false
-    }
+    return isValid
   }
 }
