@@ -1,4 +1,4 @@
-import StrError from './types/str-error'
+import { StrError } from 'hydraulik-types'
 
 export default class Store {
   constructor(schema) {

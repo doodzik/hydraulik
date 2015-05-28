@@ -1,7 +1,7 @@
 jest.dontMock('../schema')
 
 var Schema = require('../schema'),
-    Str    = require('../types/str')
+    Str = require('hydraulik-types').Str
 
 describe('Schema', function() {
   it('#new sets the name', function() {

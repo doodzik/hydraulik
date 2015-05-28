@@ -1,7 +1,7 @@
 import React      from 'react/addons'
 import dispatcher from './dispatcher'
 import { Schema, Store, Flux } from '../src/hydraulik'
-import Str from '../src/types/str'
+import { Str } from 'hydraulik-types'
 
 var schema = new Schema('Name').type(Str).as('name')
 var Names  = new Flux(new Store(schema), dispatcher)

@@ -2,7 +2,7 @@ jest.autoMockOff()
 
 var Schema = require('../schema'),
     Store = require('../store'),
-    Str = require('../types/str')
+    Str = require('hydraulik-types').Str
 
 describe('Store', function() {
   it('#new sets the schema and init store', function() {
