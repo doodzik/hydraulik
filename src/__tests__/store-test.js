@@ -13,39 +13,21 @@ describe('Store', function() {
     expect(store.store).toEqual([])
   })
 
-  it("#filter sets filter and returns this", function() {
-    var store = new Store(new Schema('Name'))
-    expect(store.filter('hello')).toEqual(store)
-    expect(store.filterFn).toEqual('hello')
-  })
-
-  it("#filterFn if filter isn't called than function that returns true", function() {
-    var store = new Store(new Schema('Name'))
-    expect(store.filterFn()).toEqual(true)
-  })
-
   it('#read returns the store', function() {
-    var store
-    store = new Store(new Schema('Name'))
+    var store = new Store(new Schema('Name'))
     expect(store.read()).toEqual([])
     store.store = ['hello']
     expect(store.read()).toEqual(['hello'])
   })
 
-  it('#read calls filter with each element in store', function() {
-    var store = new Store(new Schema('Name'))
-    store.filter(function(val){ return 'hello' == val })
-    store.store = ['hello', 'huhuhu']
-    expect(store.read()).toEqual(['hello'])
-  })
-
   it('#read filters elements', function() {
-    var store = new Store(new Schema('Name'))
-    store.filterFn = jest.genMockFn()
+    var schema      = new Schema('Name')
+    schema.filterFn = jest.genMockFn()
                       .mockReturnValueOnce(false)
                       .mockReturnValueOnce(true)
                       .mockReturnValueOnce(false)
-    store.store = ['hello', 'huhuhu', 'beubte']
+    var store       = new Store(schema)
+    store.store     = ['hello', 'huhuhu', 'beubte']
     expect(store.read()).toEqual(['huhuhu'])
   })
 

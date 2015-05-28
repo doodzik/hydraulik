@@ -7,18 +7,10 @@ export default class Store {
     this.error      = {}
     this.name       = schema.name
     this.actionType = this.name + '_CREATE'
-    this.filterFn   = (_val) => { return true }
   }
 
-  // DSL
-  filter(filterFn){
-    this.filterFn = filterFn
-    return this
-  }
-
-  // Implementation
   read(){
-    return this.store.filter(this.filterFn)
+    return this.store.filter(this.schema.filterFn)
   }
 
   create(arg){

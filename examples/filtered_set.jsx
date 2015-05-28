@@ -4,10 +4,10 @@ import { Schema, Store, Flux } from '../src/hydraulik'
 import { Str } from 'hydraulik-types'
 
 var schema = new Schema('Name').type(Str).as('name')
-var store  = new Store(schema)
-store.filter((val) => {
+schema.filter((val) => {
   return 'Second' == val.name || 'Third' == val.name
 })
+var store  = new Store(schema)
 var Names  = new Flux(store, dispatcher)
 
 Names.create({ name: 'First'})

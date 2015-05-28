@@ -37,4 +37,15 @@ describe('Schema', function() {
       }
     ])
   })
+
+  it("#filter sets filter and returns this", function() {
+    var schema = new Schema('Name')
+    expect(schema.filter('hello')).toEqual(schema)
+    expect(schema.filterFn).toEqual('hello')
+  })
+
+  it("#filterFn if filter isn't called than function that returns true", function() {
+    var schema = new Schema('Name')
+    expect(schema.filterFn()).toEqual(true)
+  })
 })
