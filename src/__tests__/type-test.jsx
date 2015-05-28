@@ -1,8 +1,7 @@
 jest.dontMock('../type')
 
 describe('type', function() {
-  var Type
-  Type = require('../type')
+  var Type = require('../type')
   it('#validation return empty str', function() {
       expect(new Type('').validation()).toEqual('')
   })
@@ -27,5 +26,20 @@ describe('type', function() {
   it('#getName with custom name', function() {
     var type = new Type('', { name: 'CustomName'})
     expect(type.getName()).toEqual('CustomName')
+  })
+
+  it('validate without super', function () {
+    class ValidateWithoutSuper extends Type {
+      constructor(value, options) { super(value, options) }
+      validation(){ return 'this is a super error' }
+    }
+
+    class ValidateWithoutSuper2 extends ValidateWithoutSuper {
+      constructor(value, options) { super(value, options) }
+      validation(){ return 'this is a child error' }
+    }
+    
+    var type = new ValidateWithoutSuper2('')
+    expect(type.validate()).toEqual('this is a super error')
   })
 })

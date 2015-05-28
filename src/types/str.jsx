@@ -9,8 +9,6 @@ export default class Str extends Type {
   }
 
   validation(){
-    if (super.validation().length != 0)
-      return super.validation()
     if (this.length < this.min)
       return 'Str is too short'
     if (this.length > this.max)
