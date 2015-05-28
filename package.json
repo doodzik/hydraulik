@@ -9,6 +9,9 @@
     "prepublish": "gulp build",
     "postpublish": "gulp tag"
   },
+  "bin": {
+    "hydraulik": "./bin/hydraulik"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/doodzik/void.git"
