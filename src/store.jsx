@@ -2,15 +2,23 @@ import { StrError } from 'hydraulik-types'
 
 export default class Store {
   constructor(schema) {
-    this.schema = schema
-    this.store  = []
-    this.error  = {}
-    this.name   = schema.name
+    this.schema     = schema
+    this.store      = []
+    this.error      = {}
+    this.name       = schema.name
     this.actionType = this.name + '_CREATE'
+    this.filterFn   = (_val) => { return true }
   }
 
+  // DSL
+  filter(filterFn){
+    this.filterFn = filterFn
+    return this
+  }
+
+  // Implementation
   read(){
-    return this.store
+    return this.store.filter(this.filterFn)
   }
 
   create(arg){
