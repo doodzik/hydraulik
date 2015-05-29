@@ -1,8 +1,8 @@
 jest.autoMockOff()
 
 var Schema = require('../schema'),
-    Store = require('../store'),
-    Str = require('hydraulik-types').Str
+    Store  = require('../store'),
+    Str    = require('hydraulik-types').Str
 
 describe('Store', function() {
   it('#new sets the schema and init store', function() {
@@ -10,7 +10,6 @@ describe('Store', function() {
     schema = new Schema('Name')
     store = new Store(schema)
     expect(store.schema).toEqual(schema)
-    expect(store.store).toEqual([])
   })
 
   it('#read returns the store', function() {
