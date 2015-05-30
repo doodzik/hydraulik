@@ -1,9 +1,10 @@
-jest.autoMockOff()
+jest.dontMock('../schema')
+jest.dontMock('../store')
+jest.dontMock('../stores')
 
 var Schema = require('../schema'),
     Store  = require('../store'),
-    Stores = require('../stores'),
-    Str    = require('hydraulik-types').Str
+    Stores = require('../stores')
 
 describe('Stores', function() {
   it('#new sets the schema and init store', function() {
@@ -18,17 +19,5 @@ describe('Stores', function() {
     var stores = new Stores(Store)
     stores.register(schema)
     expect(stores.stores.Name).toEqual(store)
-  })
-
-  it('#buildSubsets subset and mainSet share the same store', function() {
-    var schema  = new Schema('Name').type(Str)
-    var schema2 = new Schema('Name2').subset(schema)
-    var stores  = new Stores(Store)
-    stores.register(schema)
-    stores.register(schema2)
-    stores.buildSubsets()
-    stores.stores.Name2.store.push('foo')
-    stores.stores.Name.store.push('bar')
-    expect(stores.stores.Name2.store).toEqual(stores.stores.Name.store)
   })
 })
