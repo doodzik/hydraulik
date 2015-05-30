@@ -3,6 +3,7 @@ jest.autoMockOff()
 var Schema      = require('../schema'),
     Store       = require('../store'),
     Stores      = require('../stores'),
+    Str         = require('hydraulik-types').Str,
     StoresBuild = require('../stores-build')
 
 describe('StoresBuild', function() {
@@ -13,9 +14,11 @@ describe('StoresBuild', function() {
     stores.register(schema)
     stores.register(schema2)
     var storesBuild  = new StoresBuild(stores)
-    storesBuild.stores.Name2.store.push('foo')
-    storesBuild.stores.Name.store.push('bar')
+    storesBuild.stores.Name2.create('foo')
+    storesBuild.stores.Name.create('bar')
+    storesBuild.stores.Name.error['bar'] = 'baz'
     expect(stores.stores.Name2.store).toEqual(stores.stores.Name.store)
+    expect(stores.stores.Name2.error).toEqual(stores.stores.Name.error)
   })
 
   it('#splitIntoBaseAndSubSets', function() {

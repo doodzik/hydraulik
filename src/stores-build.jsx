@@ -14,6 +14,7 @@ export default class StoresBuild {
       _store = this.stores[store]
       if (!_store.schema.subsetOf) continue
       _store.store = this.stores[_store.schema.subsetOf.name].store
+      _store.error = this.stores[_store.schema.subsetOf.name].error
     }
   }
 
