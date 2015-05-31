@@ -8,19 +8,34 @@ const sourcemaps  = require('gulp-sourcemaps')
 const babel       = require('gulp-babel')
 
 // gulp build -> compile coffee script
-gulp.task('build', ['clean'], function() {
+gulp.task('build', ['build_lib', 'build_bin'])
+
+gulp.task('build_lib', ['clean_lib'], function() {
   return gulp
-    .src('src/**/*.jsx')
+    .src(['src/**/*.jsx', 'src/**/*.js', '!src/**/__tests__/*'])
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('lib'))
 })
 
+gulp.task('build_bin', ['clean_bin'], function() {
+  return gulp
+    .src('bin/templatesSrc/**/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('bin/templates'))
+})
+
 // gulp clean -> clean generated files
-gulp.task('clean', function(done) {
+gulp.task('clean_lib', function(done) {
   del([
     'lib'
+  ], done)
+})
+
+gulp.task('clean_bin', function(done) {
+  del([
+    'bin/templates'
   ], done)
 })
 

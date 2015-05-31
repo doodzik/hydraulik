@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 
-var yargs = require('yargs')
+var yargs  = require('yargs')
+var init   = require('./init')
+var schema = require('./schema')
 
 var argv = yargs.usage('$0 command')
-  .command('init', 'initilizen a new hydraulik application', function (yargs) {
-    console.log('initilized')
-  })
-  .command('schema', 'generates a new schema', function (yargs) {
-    console.log('schema generated')
-  })
+  .command('init', 'initilizen a new hydraulik application', init)
+  .command('schema', 'generates a new schema', schema)
   .demand(1, 'must provide a valid command')
   .help('h')
   .alias('h', 'help')
