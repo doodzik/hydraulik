@@ -9,12 +9,12 @@ describe('FilteredSubset', function() {
     var filteredSubset = TestUtils.renderIntoDocument(<FilteredSubset />)
 
     var ul = TestUtils.findRenderedDOMComponentWithTag(filteredSubset, 'ul')
-    expect(ul.getDOMNode().textContent).toEqual('Second')
+    expect(ul.getDOMNode().textContent).toEqual('')
 
     var input = TestUtils.findRenderedDOMComponentWithTag(filteredSubset, 'button')
     TestUtils.Simulate.click(input)
 
     var ul = TestUtils.findRenderedDOMComponentWithTag(filteredSubset, 'ul')
-    expect(ul.getDOMNode().textContent).toEqual('SecondThird')
+    expect(ul.getDOMNode().textContent).toEqual('Third')
   })
 })
