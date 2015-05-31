@@ -1,3 +1,15 @@
 #!/usr/bin/env node
 
-console.log('hello world')
+var yargs = require('yargs')
+
+var argv = yargs.usage('$0 command')
+  .command('init', 'initilizen a new hydraulik application', function (yargs) {
+    console.log('initilized')
+  })
+  .command('schema', 'generates a new schema', function (yargs) {
+    console.log('schema generated')
+  })
+  .demand(1, 'must provide a valid command')
+  .help('h')
+  .alias('h', 'help')
+  .argv
