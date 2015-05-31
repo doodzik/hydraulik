@@ -3,15 +3,13 @@ export default class Schema {
     this.name           = name
     this.types          = []
     this.subsetOf       = false
-    this.filterFn       = (_val) => { return true }
-    this.filterOriginal = (_val) => { return true } // if filterFn is overwritten keep the original filter around
+    this.filterFn       = _val => { return true }
+    this.filterOriginal = _val => { return true } // if filterFn is overwritten keep the original filter around
   }
 
   type(type) {
-    this.types.push({
-      type: type,
-      name: type.name
-    })
+    var name = type.name
+    this.types.push({ type, name })
     return this
   }
 
@@ -34,7 +32,7 @@ export default class Schema {
   }
 
   _getFilterComposition(parentSet) {
-    return (val) => { return parentSet.filterFn(val) && this.filterOriginal(val) }
+    return val => { return parentSet.filterFn(val) && this.filterOriginal(val) }
   }
 
   _getMainSet(parentSet) {

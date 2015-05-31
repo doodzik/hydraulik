@@ -5,27 +5,27 @@ var CHANGE_EVENT = 'change'
 var ERROR_EVENT  = 'error'
 
 export default assign({}, EventEmitter.prototype, {
-  emitChange: function() {
+  emitChange() {
     this.emit(CHANGE_EVENT)
   },
 
-  addChangeListener: function(callback) {
+  addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback)
   },
 
-  removeChangeListener: function(callback) {
+  removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback)
   },
 
-  emitError: function() {
+  emitError() {
     this.emit(ERROR_EVENT)
   },
 
-  addErrorListener: function(callback) {
+  addErrorListener(callback) {
     this.on(ERROR_EVENT, callback)
   },
 
-  removeErrorListener: function(callback) {
+  removeErrorListener(callback) {
     this.removeListener(ERROR_EVENT, callback)
   }
 })
