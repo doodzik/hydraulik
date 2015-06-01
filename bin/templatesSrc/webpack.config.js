@@ -29,7 +29,7 @@ module.exports = {
 
 module.exports = function (name) {
   return {
-    target: 'webpack.config.js'
-    content: content,
+    target: 'webpack.config.js',
+    content: content
   }
 }

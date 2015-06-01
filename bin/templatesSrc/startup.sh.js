@@ -13,7 +13,7 @@ nvm run server.js
 
 module.exports = function (name) {
   return {
-    target: 'bin/startup.sh'
-    content: content,
+    target: 'bin/startup.sh',
+    content: content
   }
 }

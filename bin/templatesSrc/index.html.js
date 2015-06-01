@@ -12,7 +12,7 @@ module.exports = function (name) {
   </html>
   `
   return {
-    target: 'public/index.html'
-    content: content)(name),
+    target: 'public/index.html',
+    content: content)(name)
   }
 }

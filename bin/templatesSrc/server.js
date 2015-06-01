@@ -23,7 +23,7 @@ app.listen(port)
 
 module.exports = function (name) {
   return {
-    target: 'server'
-    content: content,
+    target: 'server',
+    content: content
   }
 }

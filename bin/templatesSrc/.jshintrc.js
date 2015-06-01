@@ -7,7 +7,7 @@ const content = `
 
 module.exports = function (name) {
   return {
-    target: '.jshintrc'
-    content: content,
+    target: '.jshintrc',
+    content: content
   }
 }

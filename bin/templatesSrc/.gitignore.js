@@ -34,7 +34,7 @@ npm-debug.log
 
 module.exports = function (name) {
   return {
-    target: '.gitignore'
-    content: content,
+    target: '.gitignore',
+    content: content
   }
 }
