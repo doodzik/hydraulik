@@ -1,10 +1,11 @@
 import Flux      from './flux'
 import FluxBase  from './flux-base'
+import { Dispatcher } from 'flux'
 
 export default class Fluxes {
-  constructor(storesBuild, dispatcher) {
+  constructor(storesBuild) {
     this.fluxes     = {}
-    this.dispatcher = dispatcher
+    this.dispatcher = new Dispatcher()
     this.setsBase   = storesBuild.baseSets
     this.setsSub    = storesBuild.subSets
     this.setBaseSets()

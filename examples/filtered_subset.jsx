@@ -1,5 +1,4 @@
 import React      from 'react/addons'
-import dispatcher from './dispatcher'
 import { Schema, Store, Flux, Stores, StoresBuild, Fluxes } from '../src/hydraulik'
 import { Str } from 'hydraulik-types'
 
@@ -13,7 +12,7 @@ stores.register(Name)
 stores.register(Name2)
 
 var storesBuild = new StoresBuild(stores)
-var fluxes      = new Fluxes(storesBuild, dispatcher).fluxes
+var fluxes      = new Fluxes(storesBuild).fluxes
 var Names       = fluxes.Name
 var Names2      = fluxes.Name2
 
