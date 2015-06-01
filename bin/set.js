@@ -1,3 +1,3 @@
 module.exports = function(yargs) {
-  console.log('schema')
+  console.log('set')
 }
