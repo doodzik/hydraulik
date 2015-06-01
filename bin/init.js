@@ -19,6 +19,7 @@ module.exports = function(yargs) {
   Promise.map(dirs, fs.mkdir)
   .then(function () {
     return fs.readdir(pDir + '/bin/templates')
+  })
   .map(function (file) {
     var templateObj = require(pDir + '/bin/templates/' + file)(name)
     return fs.writeFile(pDir + '/' + templateObj.target, templateObj.content)
@@ -27,10 +28,11 @@ module.exports = function(yargs) {
     // extend package info
     data["main"] = "server.js"
 
-    data["scripts"]            = data["scripts"] || {}
-    data["scripts"]["start"]   = "./bin/startup.sh"
-    data["scripts"]["test"]    = "jest"
-    data["scripts"]["webpack"] = "webpack"
+    data["scripts"]              = data["scripts"] || {}
+    data["scripts"]["start"]     = "./bin/startup.sh"
+    data["scripts"]["test"]      = "jest"
+    data["scripts"]["webpack"]   = "webpack"
+    // data["scripts"]["hydraulik"] = "hydraulik"
 
     data["dependencies"]                     = data["dependencies"] || {}
     data["dependencies"]["koa"]              = "^0.20.0"
@@ -38,6 +40,7 @@ module.exports = function(yargs) {
     data["dependencies"]["normalize.css"]    =  "^3.0.3"
     data["dependencies"]["object-assign"]    = "^2.0.0"
     data["dependencies"]["react"]            = "^0.13.3"
+    // data["dependencies"]["hydraulik"]        = "^0.1.0"
 
     data["devDependencies"]                      = data["devDependencies"] || {}
     data["devDependencies"]["babel-core"]        = "^5.4.2"
