@@ -13,6 +13,6 @@ module.exports = function (name) {
   `
   return {
     target: 'public/index.html',
-    content: content(name)
+    content: content
   }
 }

@@ -7,3 +7,4 @@ Gulpfile
 src
 examples
 preprocessor.js
+bin/templatesSrc

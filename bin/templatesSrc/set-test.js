@@ -1,4 +1,5 @@
 module.exports = function (name) {
+  const nameUpper = name.charAt(0).toUpperCase() + name.slice(1)
   const content =
   `
   <html>
@@ -12,7 +13,7 @@ module.exports = function (name) {
   </html>
   `
   return {
-    target:  `sets/__tests__/${name}`,
-    content: content(name)
+    target:  `sets/__tests__/${name}-test.js`,
+    content: content
   }
 }

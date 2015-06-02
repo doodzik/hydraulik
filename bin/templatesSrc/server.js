@@ -1,4 +1,6 @@
 const content = `
+require('harmonize')()
+
 var koa          = require('koa'),
     app          = koa(),
     path         = require('path'),

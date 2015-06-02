@@ -1,23 +1,21 @@
 var Promise  = require('bluebird'),
-    fs       = require('fs')
-
-Promise.promisifyAll(fs)
+    path     = require('path'),
+    fs       = Promise.promisifyAll(require('fs')),
+    mkdirp   = Promise.promisifyAll(require("mkdirp"))
 
 module.exports = function(yargs) {
   var pDir          = process.cwd(),
       argv          = yargs
-                      .demand(2, 'must provide a component name')
-                      .argv
-                      // capitalize str
-      name          = argv._[1].charAt(0).toUpperCase() + string.slice(1),
-      component     = require(pDir + '/bin/templates/component.jsx.js')(name)
-      componentCss  = require(pDir + '/bin/templates/component.styl.js')(name)
-      componentTest = require(pDir + '/bin/templates/component-test.jsx.js')(name)
+                      .demand(2, 'must provide a set name')
+                      .argv,
+      name          = argv._[1]
+      component     = require(__dirname + '/templates/component.jsx.js')(name),
+      componentCss  = require(__dirname + '/templates/component.styl.js')(name),
+      componentTest = require(__dirname + '/templates/component-test.jsx.js')(name)
 
-  fs.mkdir(pDir + '/components/' + name)
-  .then(function () {
-    return Promise.map([componentTest, component, componentCss], function (templateObj) {
-      return fs.writeFile(pDir + '/' + templateObj.target, templateObj.content)
+  Promise.map([component, componentCss, componentTest], function (componentObj) {
+    return mkdirp.mkdirpAsync(path.dirname(componentObj.target)).then(function () {
+      return fs.writeFileAsync(pDir + '/' + componentObj.target, componentObj.content)
     })
   })
   .catch(function(err) {
