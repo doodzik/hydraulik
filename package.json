@@ -10,7 +10,7 @@
     "postpublish": "gulp tag"
   },
   "bin": {
-    "hydraulik": "./bin/hydraulik"
+    "hydraulik": "./node_modules/.bin/hydraulik"
   },
   "repository": {
     "type": "git",
@@ -23,11 +23,9 @@
   },
   "homepage": "https://github.com/doodzik/void#readme",
   "dependencies": {
-    "bluebird": "^2.9.27",
+    "hydraulik-cli": "0.0.1",
     "hydraulik-types": "0.0.1",
-    "mkdirp": "^0.5.1",
-    "object-assign": "^2.0.0",
-    "yargs": "^3.10.0"
+    "object-assign": "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^5.4.7",
