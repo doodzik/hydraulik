@@ -14,8 +14,8 @@ export default class FluxBase {
     this.dispatcher.dispatch({ actionType, argObj })
   }
 
-  getStateObj(){
-    return { [this.store.name]: this.store.read() }
+  getStateObj(props){
+    return { [this.store.name]: this.store.read(props) }
   }
 
   getStateObjError(){
@@ -27,7 +27,7 @@ export default class FluxBase {
     var onChangeFn = '_' + this.baseStore.name + '_change'
     return {
       getInitialState() {
-        return _this.getStateObj()
+        return _this.getStateObj(this.props)
       },
 
       componentDidMount() {
@@ -39,7 +39,7 @@ export default class FluxBase {
       },
 
       [onChangeFn]() {
-         this.setState(_this.getStateObj());
+         this.setState(_this.getStateObj(this.props));
       }
     }
   }

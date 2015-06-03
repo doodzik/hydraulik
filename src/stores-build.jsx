@@ -9,7 +9,8 @@ export default class StoresBuild {
 
   // makes that the baseSet and subSets use the same storage
   buildSubsets() {
-    for (store in this.stores) {
+    var _store
+    for (var store in this.stores) {
       if (!this.stores.hasOwnProperty(store)) continue
       _store = this.stores[store]
       if (!_store.schema.subsetOf) continue
@@ -20,7 +21,7 @@ export default class StoresBuild {
 
   splitIntoBaseAndSubSets(){
     var _store
-    for (store in this.stores) {
+    for (var store in this.stores) {
       if (!this.stores.hasOwnProperty(store)) continue
       _store = this.stores[store]
       if (_store.schema.subsetOf)

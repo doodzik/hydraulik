@@ -12,11 +12,22 @@ describe('Store', function() {
     expect(store.schema).toEqual(schema)
   })
 
-  it('#read returns the store', function() {
-    var store = new Store(new Schema('Name'))
-    expect(store.read()).toEqual([])
-    store.store = ['hello']
-    expect(store.read()).toEqual(['hello'])
+  describe('#read', function () {
+    it('returns the store', function() {
+      var store = new Store(new Schema('Name'))
+      expect(store.read()).toEqual([])
+      store.store = ['hello']
+      expect(store.read()).toEqual(['hello'])
+    })
+
+    it('props is accessable through filterFn', function() {
+      var schema = new Schema('Name').filter((val) => {
+        return val.props == 'name'
+      })
+      var store   = new Store(schema)
+      store.store = [{name: 'hello'}]
+      expect(store.read('name')).toEqual([{name: 'hello'}])
+    })
   })
 
   it('#read filters elements', function() {

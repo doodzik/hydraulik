@@ -9,8 +9,13 @@ export default class Store {
     this.actionType = this.name + '_CREATE'
   }
 
-  read(){
-    return this.store.filter(this.schema.filterFn)
+  read(props){
+    return this.store.filter((val) => {
+      val['props'] = props
+      returnVal    = this.schema.filterFn(val)
+      delete val['props']
+      return returnVal
+    })
   }
 
   create(arg){

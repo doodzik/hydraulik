@@ -13,7 +13,7 @@ export default class Fluxes {
   }
 
   setBaseSets(){
-    for (store in this.setsBase) {
+    for (var store in this.setsBase) {
       if (!this.setsBase.hasOwnProperty(store)) continue
       this.fluxes[store] = new Flux(this.setsBase[store], this.dispatcher)
     }
@@ -21,7 +21,7 @@ export default class Fluxes {
 
   setSubSets(){
     var _store, baseEvent
-    for (store in this.setsSub) {
+    for (var store in this.setsSub) {
       if (!this.setsSub.hasOwnProperty(store)) continue
       _store    = this.setsSub[store]
       baseEvent = this.fluxes[_store.schema.subsetOf.name].events
