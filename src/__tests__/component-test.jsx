@@ -2,9 +2,9 @@ jest.autoMockOff()
 
 var React = require('react/addons')
 var Schema = require('../schema')
-var Stores = require('../stores')
-var Store = require('../store')
-var StoresBuild = require('../stores-build')
+var Sets = require('../sets')
+var Set = require('../set')
+var SetsBuild = require('../sets-build')
 var Fluxes = require('../fluxes')
 var Str = require('hydraulik-types').Str
 
@@ -13,11 +13,11 @@ var TestUtils  = React.addons.TestUtils
 var Name = new Schema('Name').type(Str).as('name')
                              .filter(val => 'Second' == val.name || 'Third' == val.name)
 
-var stores = new Stores(Store)
-    stores.register(Name)
+var sets = new Sets(Set)
+    sets.register(Name)
 
-var storesBuild = new StoresBuild(stores)
-var fluxes      = new Fluxes(storesBuild).fluxes
+var setsBuild = new SetsBuild(sets)
+var fluxes      = new Fluxes(setsBuild).fluxes
 var Names       = fluxes.Name
 
 Names.create({ name: 'First'})

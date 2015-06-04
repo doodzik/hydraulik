@@ -3,29 +3,29 @@ import FluxBase  from './flux-base'
 import { Dispatcher } from 'flux'
 
 export default class Fluxes {
-  constructor(storesBuild) {
+  constructor(setsBuild) {
     this.fluxes     = {}
     this.dispatcher = new Dispatcher()
-    this.setsBase   = storesBuild.baseSets
-    this.setsSub    = storesBuild.subSets
+    this.setsBase   = setsBuild.baseSets
+    this.setsSub    = setsBuild.subSets
     this.setBaseSets()
     this.setSubSets()
   }
 
   setBaseSets(){
-    for (var store in this.setsBase) {
-      if (!this.setsBase.hasOwnProperty(store)) continue
-      this.fluxes[store] = new Flux(this.setsBase[store], this.dispatcher)
+    for (var set in this.setsBase) {
+      if (!this.setsBase.hasOwnProperty(set)) continue
+      this.fluxes[set] = new Flux(this.setsBase[set], this.dispatcher)
     }
   }
 
   setSubSets(){
-    var _store, baseEvent
-    for (var store in this.setsSub) {
-      if (!this.setsSub.hasOwnProperty(store)) continue
-      _store    = this.setsSub[store]
-      baseEvent = this.fluxes[_store.schema.subsetOf.name].events
-      this.fluxes[store] = new FluxBase(_store, this.dispatcher, baseEvent)
+    var _set, baseEvent
+    for (var set in this.setsSub) {
+      if (!this.setsSub.hasOwnProperty(set)) continue
+      _set    = this.setsSub[set]
+      baseEvent = this.fluxes[_set.schema.subsetOf.name].events
+      this.fluxes[set] = new FluxBase(_set, this.dispatcher, baseEvent)
     }
   }
 }

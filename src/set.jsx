@@ -1,16 +1,16 @@
 import { StrError } from 'hydraulik-types'
 
-export default class Store {
+export default class Set {
   constructor(schema) {
     this.schema     = schema
-    this.store      = []
+    this.set      = []
     this.error      = {}
     this.name       = schema.name
     this.actionType = this.name + '_CREATE'
   }
 
   read(props){
-    return this.store.filter((val) => {
+    return this.set.filter((val) => {
       val['props'] = props
       returnVal    = this.schema.filterFn(val)
       delete val['props']
@@ -19,7 +19,7 @@ export default class Store {
   }
 
   create(arg){
-    this.store.push(arg)
+    this.set.push(arg)
   }
 
   // return true if no error else falso

@@ -1,8 +1,8 @@
 jest.dontMock('../flux-base')
 
 var FluxBase   = require('../flux-base'),
-    Store      = require('../store'),
-    EventStore = require('../EventStore'),
+    Set        = require('../set'),
+    EventSet = require('../EventSet'),
     assign     = require('object-assign'),
     React      = require('react/addons'),
     TestUtils  = React.addons.TestUtils
@@ -10,14 +10,14 @@ var FluxBase   = require('../flux-base'),
 describe('FluxBase', function() {
   // #Component tests are in Component-test
   it('#create', function() {
-    var dispatcher, flux, store
+    var dispatcher, flux, set
     dispatcher = {
       dispatch: jest.genMockFn(),
       register: jest.genMockFn()
     }
-    store = new Store()
-    store.actionType = 'actionType'
-    flux = new FluxBase(store, dispatcher)
+    set = new Set()
+    set.actionType = 'actionType'
+    flux = new FluxBase(set, dispatcher)
     flux.create('argObj')
     expect(flux.dispatcher.dispatch).toBeCalledWith({
       actionType: 'actionType',
@@ -26,24 +26,24 @@ describe('FluxBase', function() {
   })
 
   describe('getStateObj', function() {
-    var dispatcher, flux, store
+    var dispatcher, flux, set
     dispatcher = {
       dispatch: jest.genMockFn(),
       register: jest.genMockFn()
     }
-    store = new Store()
-    store.name = 'Name'
-    store.error = { foo: 'bar' }
-    store.read.mockReturnValue('value')
+    set = new Set()
+    set.name = 'Name'
+    set.error = { foo: 'bar' }
+    set.read.mockReturnValue('value')
     it('#getStateObj', function() {
-      flux = new FluxBase(store, dispatcher)
+      flux = new FluxBase(set, dispatcher)
       expect(flux.getStateObj()).toEqual({
         Name: 'value'
       })
     })
 
     it('#getStateObjError', function() {
-      flux = new FluxBase(store, dispatcher)
+      flux = new FluxBase(set, dispatcher)
       expect(flux.getStateObjError()).toEqual({
         NameError: { foo: 'bar' }
       })

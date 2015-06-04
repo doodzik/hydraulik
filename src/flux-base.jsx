@@ -1,26 +1,26 @@
-import EventStore from './EventStore'
+import EventSet from './EventSet'
 import assign from 'object-assign'
 import React, { Component } from "react"
 
 export default class FluxBase {
-  constructor(store, dispatcher, events = assign({}, EventStore)) {
-    this.store      = store
+  constructor(set, dispatcher, events = assign({}, EventSet)) {
+    this.set      = set
     this.dispatcher = dispatcher
     this.events     = events
-    this.baseStore  = this.store.subsetOf || this.store
+    this.baseSet  = this.set.subsetOf || this.set
   }
 
   create(argObj){
-    var actionType = this.baseStore.actionType
+    var actionType = this.baseSet.actionType
     this.dispatcher.dispatch({ actionType, argObj })
   }
 
   getStateObj(props){
-    return { [this.store.name]: this.store.read(props) }
+    return { [this.set.name]: this.set.read(props) }
   }
 
   getStateObjError(){
-    return { [this.store.name + 'Error']: this.store.error }
+    return { [this.set.name + 'Error']: this.set.error }
   }
 
   Component(ComposedComponent) {
