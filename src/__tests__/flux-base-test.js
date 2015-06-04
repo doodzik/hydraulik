@@ -3,7 +3,9 @@ jest.dontMock('../flux-base')
 var FluxBase   = require('../flux-base'),
     Store      = require('../store'),
     EventStore = require('../EventStore'),
-    assign     = require('object-assign')
+    assign     = require('object-assign'),
+    React      = require('react/addons'),
+    TestUtils  = React.addons.TestUtils
 
 describe('FluxBase', function() {
   it('#create', function() {
@@ -47,6 +49,9 @@ describe('FluxBase', function() {
     })
   })
 
+  // #Component tests are in Component-test
+
+  // TODO remove everthing below Mixins are deprecated
   describe('#mixin', function() {
     var dispatcher, flux, store
     dispatcher = {

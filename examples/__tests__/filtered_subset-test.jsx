@@ -1,7 +1,7 @@
 jest.autoMockOff()
 
 var React = require('react/addons')
-var FilteredSet = require('../filtered_subset')
+var FilteredSubset = require('../filtered_subset')
 var TestUtils = React.addons.TestUtils;
 
 describe('FilteredSubset', function() {

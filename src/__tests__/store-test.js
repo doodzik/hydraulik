@@ -21,9 +21,7 @@ describe('Store', function() {
     })
 
     it('props is accessable through filterFn', function() {
-      var schema = new Schema('Name').filter((val) => {
-        return val.props == 'name'
-      })
+      var schema = new Schema('Name').filter(val => val.props == 'name')
       var store   = new Store(schema)
       store.store = [{name: 'hello'}]
       expect(store.read('name')).toEqual([{name: 'hello'}])
