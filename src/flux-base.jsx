@@ -74,49 +74,4 @@ export default class FluxBase {
       }
     }
   }
-
-  // TODO remove everthing below Mixins are deprecated
-  mixin(){
-    var _this = this
-    var onChangeFn = '_' + this.baseStore.name + '_change'
-    return {
-      getInitialState() {
-        return _this.getStateObj(this.props)
-      },
-
-      componentDidMount() {
-        _this.events.addChangeListener(this[onChangeFn]);
-      },
-
-      componentWillUnmount() {
-        _this.events.removeChangeListener(this[onChangeFn]);
-      },
-
-      [onChangeFn]() {
-         this.setState(_this.getStateObj(this.props));
-      }
-    }
-  }
-
-  mixinError(){
-    var _this = this
-    var onErrorFn = '_' + this.baseStore.name + '_error'
-    return {
-      getInitialState() {
-        return _this.getStateObjError()
-      },
-
-      componentDidMount() {
-        _this.events.addErrorListener(this[onErrorFn]);
-      },
-
-      componentWillUnmount() {
-        _this.events.removeErrorListener(this[onErrorFn]);
-      },
-
-      [onErrorFn]() {
-         this.setState(_this.getStateObjError());
-      }
-    }
-  }
 }

@@ -5,6 +5,4 @@
 npm-debug.log
 Gulpfile
 src
-examples
 preprocessor.js
-bin/templatesSrc
