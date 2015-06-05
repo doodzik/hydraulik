@@ -5,7 +5,7 @@ var Schema = require('../schema')
 var Sets = require('../sets')
 var Set = require('../set')
 var SetsBuild = require('../sets-build')
-var Fluxes = require('../fluxes')
+var ClassObserver = require('../classObserver')
 var Str = require('hydraulik-types').Str
 
 var TestUtils  = React.addons.TestUtils
@@ -16,9 +16,9 @@ var Name = new Schema('Name').type(Str).as('name')
 var sets = new Sets(Set)
     sets.register(Name)
 
-var setsBuild = new SetsBuild(sets)
-var fluxes      = new Fluxes(setsBuild).fluxes
-var Names       = fluxes.Name
+var setsBuild      = new SetsBuild(sets)
+var classObserver  = new ClassObserver(setsBuild).sets
+var Names          = classObserver.Name
 
 Names.create({ name: 'First'})
 Names.create({ name: 'Second' })
