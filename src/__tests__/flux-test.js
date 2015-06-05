@@ -2,8 +2,8 @@ jest.dontMock('../flux')
 jest.dontMock('../flux-base')
 
 var Flux       = require('../flux'),
-    Set      = require('../set'),
-    EventSet = require('../EventSet'),
+    Set        = require('../set'),
+    setEvents  = require('../setEvents'),
     assign     = require('object-assign')
 
 describe('Flux', function() {
@@ -39,7 +39,7 @@ describe('Flux', function() {
     it('dosnt call set.create when actionType dosnt match', function() {
       set.validate.mockReturnValue(false)
       flux = new Flux(set, dispatcher)
-      calls = EventSet.emitError.mock.calls
+      calls = setEvents.emitError.mock.calls
       flux.register(action)
       expect(flux.set.create).toBeCalledWith(action.argObj)
       expect(flux.events.emitError.mock.calls).toEqual(calls)

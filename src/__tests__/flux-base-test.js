@@ -2,7 +2,7 @@ jest.dontMock('../flux-base')
 
 var FluxBase   = require('../flux-base'),
     Set        = require('../set'),
-    EventSet = require('../EventSet'),
+    setEvents  = require('../setEvents'),
     assign     = require('object-assign'),
     React      = require('react/addons'),
     TestUtils  = React.addons.TestUtils
