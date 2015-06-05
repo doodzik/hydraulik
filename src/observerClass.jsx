@@ -1,5 +1,5 @@
-import Flux      from './flux'
-import ObserverSubset  from './observerSubset'
+import ObserverSet    from './observerSet'
+import ObserverSubset from './observerSubset'
 import { Dispatcher } from 'flux'
 
 export default class ObserverClass {
@@ -15,7 +15,7 @@ export default class ObserverClass {
   setBaseSets(){
     for (var set in this.setsBase) {
       if (!this.setsBase.hasOwnProperty(set)) continue
-      this.sets[set] = new Flux(this.setsBase[set], this.dispatcher)
+      this.sets[set] = new ObserverSet(this.setsBase[set], this.dispatcher)
     }
   }
 

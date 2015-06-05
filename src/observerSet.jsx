@@ -1,6 +1,6 @@
 import ObserverSubset from './observerSubset'
 
-export default class Flux extends ObserverSubset {
+export default class ObserverSet extends ObserverSubset {
   constructor(...args) {
     super(...args)
     this.dispatcher.register(this.register.bind(this))

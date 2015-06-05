@@ -10,23 +10,23 @@ var ObserverSubset   = require('../observerSubset'),
 describe('ObserverSubset', function() {
   // #Component tests are in Component-test
   it('#create', function() {
-    var dispatcher, flux, set
+    var dispatcher, observerSet, set
     dispatcher = {
       dispatch: jest.genMockFn(),
       register: jest.genMockFn()
     }
     set = new Set()
     set.actionType = 'actionType'
-    flux = new ObserverSubset(set, dispatcher)
-    flux.create('argObj')
-    expect(flux.dispatcher.dispatch).toBeCalledWith({
+    observerSet = new ObserverSubset(set, dispatcher)
+    observerSet.create('argObj')
+    expect(observerSet.dispatcher.dispatch).toBeCalledWith({
       actionType: 'actionType',
       argObj: 'argObj'
     })
   })
 
   describe('getStateObj', function() {
-    var dispatcher, flux, set
+    var dispatcher, observerSet, set
     dispatcher = {
       dispatch: jest.genMockFn(),
       register: jest.genMockFn()
@@ -36,15 +36,15 @@ describe('ObserverSubset', function() {
     set.error = { foo: 'bar' }
     set.read.mockReturnValue('value')
     it('#getStateObj', function() {
-      flux = new ObserverSubset(set, dispatcher)
-      expect(flux.getStateObj()).toEqual({
+      observerSet = new ObserverSubset(set, dispatcher)
+      expect(observerSet.getStateObj()).toEqual({
         Name: 'value'
       })
     })
 
     it('#getStateObjError', function() {
-      flux = new ObserverSubset(set, dispatcher)
-      expect(flux.getStateObjError()).toEqual({
+      observerSet = new ObserverSubset(set, dispatcher)
+      expect(observerSet.getStateObjError()).toEqual({
         NameError: { foo: 'bar' }
       })
     })
