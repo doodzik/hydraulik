@@ -1,5 +1,5 @@
 jest.dontMock('../flux')
-jest.dontMock('../flux-base')
+jest.dontMock('../observerSubset')
 
 var Flux       = require('../flux'),
     Set        = require('../set'),

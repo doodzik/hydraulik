@@ -1,13 +1,13 @@
-jest.dontMock('../flux-base')
+jest.dontMock('../observerSubset')
 
-var FluxBase   = require('../flux-base'),
+var ObserverSubset   = require('../observerSubset'),
     Set        = require('../set'),
     setEvents  = require('../setEvents'),
     assign     = require('object-assign'),
     React      = require('react/addons'),
     TestUtils  = React.addons.TestUtils
 
-describe('FluxBase', function() {
+describe('ObserverSubset', function() {
   // #Component tests are in Component-test
   it('#create', function() {
     var dispatcher, flux, set
@@ -17,7 +17,7 @@ describe('FluxBase', function() {
     }
     set = new Set()
     set.actionType = 'actionType'
-    flux = new FluxBase(set, dispatcher)
+    flux = new ObserverSubset(set, dispatcher)
     flux.create('argObj')
     expect(flux.dispatcher.dispatch).toBeCalledWith({
       actionType: 'actionType',
@@ -36,14 +36,14 @@ describe('FluxBase', function() {
     set.error = { foo: 'bar' }
     set.read.mockReturnValue('value')
     it('#getStateObj', function() {
-      flux = new FluxBase(set, dispatcher)
+      flux = new ObserverSubset(set, dispatcher)
       expect(flux.getStateObj()).toEqual({
         Name: 'value'
       })
     })
 
     it('#getStateObjError', function() {
-      flux = new FluxBase(set, dispatcher)
+      flux = new ObserverSubset(set, dispatcher)
       expect(flux.getStateObjError()).toEqual({
         NameError: { foo: 'bar' }
       })

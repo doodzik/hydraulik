@@ -5,7 +5,7 @@ var Schema = require('../schema')
 var Sets = require('../sets')
 var Set = require('../set')
 var SetsBuild = require('../sets-build')
-var ClassObserver = require('../classObserver')
+var ObserverClass = require('../observerClass')
 var Str = require('hydraulik-types').Str
 
 var TestUtils  = React.addons.TestUtils
@@ -17,8 +17,8 @@ var sets = new Sets(Set)
     sets.register(Name)
 
 var setsBuild      = new SetsBuild(sets)
-var classObserver  = new ClassObserver(setsBuild).sets
-var Names          = classObserver.Name
+var observerClass  = new ObserverClass(setsBuild).sets
+var Names          = observerClass.Name
 
 Names.create({ name: 'First'})
 Names.create({ name: 'Second' })
@@ -29,7 +29,7 @@ class Test {
   }
 }
 
-describe('FluxBase', function() {
+describe('ObserverSubset', function() {
   it('#Component', function() {
     var TestComp = Names.Component(Test)
     var testComp = TestUtils.renderIntoDocument(<TestComp testProp="testValue"/>)
