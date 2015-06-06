@@ -1,7 +1,7 @@
 export default class Klass {
   constructor(set) {
-    this.sets = {}
-    this.set  = set
+    this.sets     = {}
+    this.set      = set
     this.baseSets = {}
     this.subSets  = {}
   }
@@ -22,9 +22,9 @@ export default class Klass {
     var _set
     for (var set in this.sets) {
       if (!this.sets.hasOwnProperty(set)) continue
-      _set = this.sets[set]
+      _set       = this.sets[set]
       if (!_set.schema.subsetOf) continue
-      _set.set = this.sets[_set.schema.subsetOf.name].set
+      _set.set   = this.sets[_set.schema.subsetOf.name].set
       _set.error = this.sets[_set.schema.subsetOf.name].error
     }
   }

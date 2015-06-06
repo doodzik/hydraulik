@@ -1,13 +1,13 @@
-import setEvents from './setEvents'
-import assign from 'object-assign'
+import setEvents            from './setEvents'
+import assign               from 'object-assign'
 import React, { Component } from "react"
 
 export default class ObserverSubset {
   constructor(set, dispatcher, events = assign({}, setEvents)) {
-    this.set      = set
+    this.set        = set
     this.dispatcher = dispatcher
     this.events     = events
-    this.baseSet  = this.set.subsetOf || this.set
+    this.baseSet    = this.set.subsetOf || this.set
   }
 
   create(argObj){

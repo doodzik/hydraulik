@@ -1,18 +1,17 @@
 jest.autoMockOff()
 
-var React         = require('react/addons')
-var Schema        = require('../schema')
-var Set           = require('../set')
-var Klass         = require('../klass')
-var ObserverKlass = require('../observerKlass')
-var Str           = require('hydraulik-types').Str
+var React         = require('react/addons'),
+    Schema        = require('../schema'),
+    Set           = require('../set'),
+    Klass         = require('../klass'),
+    ObserverKlass = require('../observerKlass'),
+    Str           = require('hydraulik-types').Str,
+    TestUtils     = React.addons.TestUtils
 
-var TestUtils  = React.addons.TestUtils
-
-var Name = new Schema('Name').type(Str).as('name')
+var Name  = new Schema('Name').type(Str).as('name')
                              .filter(val => 'Second' == val.name || 'Third' == val.name)
 
-var sets = new Klass(Set)
+var sets  = new Klass(Set)
     sets.push(Name)
 
 var observerKlass  = new ObserverKlass(sets).sets

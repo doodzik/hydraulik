@@ -5,14 +5,12 @@ var Schema = require('../schema'),
 
 describe('Schema', function() {
   it('#new sets the name', function() {
-    var schema
-    schema = new Schema('Name')
+    var schema = new Schema('Name')
     expect(schema.name).toEqual('Name')
   })
 
   it('#type adds new type', function() {
-    var schema
-    schema = new Schema('')
+    var schema = new Schema('')
     expect(schema.types).toEqual([])
     schema.type(Str)
     expect(schema.types).toEqual([
@@ -24,9 +22,7 @@ describe('Schema', function() {
   })
 
   it('#as changes name of last added type', function() {
-    var schema
-    schema = new Schema('')
-    schema.type(Str).type(Str).as('text')
+    var schema = new Schema('').type(Str).type(Str).as('text')
     expect(schema.types).toEqual([
       {
         type: Str,
@@ -62,8 +58,8 @@ describe('Schema', function() {
   })
 
   it("#_getFilterComposition composese parent with child filters", function() {
-    var schema  = new Schema('Name')
-    var schema2 = new Schema('Name2')
+    var schema  = new Schema('Name'),
+        schema2 = new Schema('Name2')
     schema.filterFn        = jest.genMockFn().mockReturnValue(true)
     schema2.filterOriginal = jest.genMockFn().mockReturnValue(true)
     filter = schema2._getFilterComposition(schema)
@@ -73,8 +69,8 @@ describe('Schema', function() {
   })
 
   it("#_getFilterComposition returns false when one fails", function() {
-    var schema  = new Schema('Name')
-    var schema2 = new Schema('Name2')
+    var schema  = new Schema('Name'),
+        schema2 = new Schema('Name2')
     schema.filterFn        = jest.genMockFn().mockReturnValue(false)
     schema2.filterOriginal = jest.genMockFn().mockReturnValue(true)
     filter = schema2._getFilterComposition(schema)

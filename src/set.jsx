@@ -3,7 +3,7 @@ import { StrError } from 'hydraulik-types'
 export default class Set {
   constructor(schema) {
     this.schema     = schema
-    this.set      = []
+    this.set        = []
     this.error      = {}
     this.name       = schema.name
     this.actionType = this.name + '_CREATE'

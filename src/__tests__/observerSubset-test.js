@@ -1,11 +1,11 @@
 jest.dontMock('../observerSubset')
 
 var ObserverSubset   = require('../observerSubset'),
-    Set        = require('../set'),
-    setEvents  = require('../setEvents'),
-    assign     = require('object-assign'),
-    React      = require('react/addons'),
-    TestUtils  = React.addons.TestUtils
+    Set              = require('../set'),
+    setEvents        = require('../setEvents'),
+    assign           = require('object-assign'),
+    React            = require('react/addons'),
+    TestUtils        = React.addons.TestUtils
 
 describe('ObserverSubset', function() {
   // #Component tests are in Component-test
@@ -26,17 +26,16 @@ describe('ObserverSubset', function() {
   })
 
   describe('getStateObj', function() {
-    var dispatcher, observerSet, set
-    dispatcher = {
-      dispatch: jest.genMockFn(),
-      register: jest.genMockFn()
-    }
-    set = new Set()
+    var dispatcher = {
+                        dispatch: jest.genMockFn(),
+                        register: jest.genMockFn()
+                      }
+    var set = new Set()
     set.name = 'Name'
     set.error = { foo: 'bar' }
     set.read.mockReturnValue('value')
     it('#getStateObj', function() {
-      observerSet = new ObserverSubset(set, dispatcher)
+      var observerSet = new ObserverSubset(set, dispatcher)
       expect(observerSet.getStateObj()).toEqual({
         Name: 'value'
       })

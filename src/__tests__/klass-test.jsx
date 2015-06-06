@@ -14,7 +14,7 @@ describe('Klass', function() {
 
   it('#register', function() {
     var schema = new Schema('Name')
-    var sets = new Klass(Set)
+    var sets   = new Klass(Set)
     sets.push(schema)
     expect(sets.sets.Name).toEqual(new Set(schema))
   })
@@ -22,7 +22,7 @@ describe('Klass', function() {
   it('#buildSubsets subset and mainSet share the same set', function() {
     var schema  = new Schema('Name').type(Str)
     var schema2 = new Schema('Name2').subset(schema)
-    var sets  = new Klass(Set)
+    var sets    = new Klass(Set)
     sets.push(schema)
     sets.push(schema2)
     sets.build()
@@ -36,7 +36,7 @@ describe('Klass', function() {
   it('#splitIntoBaseAndSubSets', function() {
     var schema  = new Schema('Name').type(Str)
     var schema2 = new Schema('Name2').subset(schema)
-    var sets  = new Klass(Set)
+    var sets    = new Klass(Set)
     sets.push(schema)
     sets.push(schema2)
     sets.build()

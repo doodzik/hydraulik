@@ -1,14 +1,13 @@
 jest.autoMockOff()
 
 var Schema = require('../schema'),
-    Set  = require('../set'),
+    Set    = require('../set'),
     Str    = require('hydraulik-types').Str
 
 describe('Set', function() {
   it('#new sets the schema and init set', function() {
-    var schema, set
-    schema = new Schema('Name')
-    set = new Set(schema)
+    var schema = new Schema('Name'),
+        set    = new Set(schema)
     expect(set.schema).toEqual(schema)
   })
 
@@ -21,9 +20,9 @@ describe('Set', function() {
     })
 
     it('props is accessable through filterFn', function() {
-      var schema = new Schema('Name').filter(val => val.props == 'name')
-      var set   = new Set(schema)
-      set.set = [{name: 'hello'}]
+      var schema = new Schema('Name').filter(val => val.props == 'name'),
+          set    = new Set(schema)
+      set.set    = [{name: 'hello'}]
       expect(set.read('name')).toEqual([{name: 'hello'}])
     })
   })
@@ -34,40 +33,27 @@ describe('Set', function() {
                       .mockReturnValueOnce(false)
                       .mockReturnValueOnce(true)
                       .mockReturnValueOnce(false)
-    var set       = new Set(schema)
-    set.set     = ['hello', 'huhuhu', 'beubte']
+    var set         = new Set(schema)
+    set.set         = ['hello', 'huhuhu', 'beubte']
     expect(set.read()).toEqual(['huhuhu'])
   })
 
   it('#create returns the set', function() {
-    var set
-    set = new Set(new Schema('Name'))
+    var set = new Set(new Schema('Name'))
     expect(set.set).toEqual([])
-    set.create({
-      name: 'hello'
-    })
-    expect(set.set).toEqual([
-      {
-        name: 'hello'
-      }
-    ])
+    set.create({name: 'hello'})
+    expect(set.set).toEqual([{name: 'hello'}])
   })
 
   describe("#validate", function() {
-    var schema, set
-    schema = new Schema('Name')
-    schema.type(Str)
-    set = new Set(schema)
+    var schema = new Schema('Name').type(Str),
+        set    = new Set(schema)
     it('fullfills', function() {
-      expect(set.validate({
-        Str: 'long enought'
-      })).toEqual(false)
+      expect(set.validate({Str: 'long enought'})).toEqual(false)
     })
 
    it('rejects', function() {
-      expect(set.validate({
-        Str: ''
-      })).toEqual(true)
+      expect(set.validate({Str: ''})).toEqual(true)
     })
   })
 })

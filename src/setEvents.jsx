@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import assign from 'object-assign'
+import assign           from 'object-assign'
 
 var CHANGE_EVENT = 'change'
 var ERROR_EVENT  = 'error'
