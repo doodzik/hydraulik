@@ -1,6 +1,4 @@
 export var Schema        = require('./schema')
 export var Set           = require('./set')
-export var Sets          = require('./sets')
-export var SetsBuild     = require('./sets-build')
-export var ObserverSet   = require('./observerSet')
-export var ObserverClass = require('./observerClass')
+export var Klass         = require('./klass')
+export var ObserverKlass = require('./observerKlass')

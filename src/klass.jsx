@@ -1,10 +1,20 @@
-export default class SetsBuild {
-  constructor(sets) {
-    this.sets = sets.sets
+export default class Klass {
+  constructor(set) {
+    this.sets = {}
+    this.set  = set
     this.baseSets = {}
     this.subSets  = {}
+  }
+
+  push(schema) {
+    this.sets[schema.name] = new this.set(schema)
+    return this
+  }
+
+  build(){
     this.buildSubsets()
     this.splitIntoBaseAndSubSets()
+    return this
   }
 
   // makes that the baseSet and subSets use the same storage

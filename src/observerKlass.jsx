@@ -2,12 +2,13 @@ import ObserverSet    from './observerSet'
 import ObserverSubset from './observerSubset'
 import { Dispatcher } from 'flux'
 
-export default class ObserverClass {
-  constructor(setsBuild) {
+export default class ObserverKlass {
+  constructor(klass) {
+    var klassBuild     = klass.build()
     this.sets          = {}
     this.dispatcher    = new Dispatcher()
-    this.setsBase      = setsBuild.baseSets
-    this.setsSub       = setsBuild.subSets
+    this.setsBase      = klassBuild.baseSets
+    this.setsSub       = klassBuild.subSets
     this.setBaseSets()
     this.setSubSets()
   }
@@ -24,7 +25,7 @@ export default class ObserverClass {
     for (var set in this.setsSub) {
       if (!this.setsSub.hasOwnProperty(set)) continue
       _set           = this.setsSub[set]
-      baseEvent      = this.observerClass[_set.schema.subsetOf.name].events
+      baseEvent      = this.observerKlass[_set.schema.subsetOf.name].events
       this.sets[set] = new ObserverSubset(_set, this.dispatcher, baseEvent)
     }
   }
