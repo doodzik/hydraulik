@@ -25,19 +25,20 @@ export default class Schema {
   }
 
   //TODO change to subsetOf
-  subset(parentSet) {
-    this.subsetOf = this._getMainSet(parentSet)
-    this.filterFn = this._getFilterComposition(parentSet)
+  subset(set) {
+    this.subsetOf = this._getBaseSet(set)
+    this.filterFn = this._getFilterComposition(set)
     return this
   }
 
-  _getFilterComposition(parentSet) {
-    return val => { return parentSet.filterFn(val) && this.filterOriginal(val) }
+  _getFilterComposition(set) {
+    return val => { return set.filterFn(val) && this.filterOriginal(val) }
   }
 
-  _getMainSet(parentSet) {
-    while (parentSet.subsetOf)
-      parentSet = parentSet.subsetOf
-    return parentSet
+  //TODO make static
+  _getBaseSet(set) {
+    while (set.subsetOf)
+      set = set.subsetOf
+    return set
   }
 }

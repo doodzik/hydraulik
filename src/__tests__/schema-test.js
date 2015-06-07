@@ -47,10 +47,10 @@ describe('Schema', function() {
     expect(schema.filterOriginal()).toEqual(true)
   })
 
-  it("#subset sets subsetOf with return value of _getMainSet and sets filterFn with _getFilterComposition", function() {
+  it("#subset sets subsetOf with return value of _getBaseSet and sets filterFn with _getFilterComposition", function() {
     var schema = new Schema('Name')
     expect(schema.subsetOf).toEqual(false)
-    schema._getMainSet           = jest.genMockFn().mockReturnValue('hello')
+    schema._getBaseSet           = jest.genMockFn().mockReturnValue('hello')
     schema._getFilterComposition = jest.genMockFn().mockReturnValue('huhu')
     expect(schema.subset('')).toEqual(schema)
     expect(schema.subsetOf).toEqual('hello')
@@ -79,11 +79,11 @@ describe('Schema', function() {
     expect(schema2.filterOriginal).not.toBeCalled()
   })
 
-  it("#_getMainSet returns main set", function() {
+  it("#_getBaseSet returns base set", function() {
     var schema  = new Schema('Name'),
         schema2 = new Schema('Name2').subset(schema),
         schema3 = new Schema('Name3').subset(schema2),
         schema4 = new Schema('Name3').subset(schema3)
-    expect(schema4._getMainSet(schema3)).toEqual(schema)
+    expect(schema4._getBaseSet(schema3)).toEqual(schema)
   })
 })

@@ -19,7 +19,7 @@ describe('Klass', function() {
     expect(sets.sets.name).toEqual(new Set(schema))
   })
 
-  it('#buildSubsets subset and mainSet share the same set', function() {
+  it('#buildSubsets subset and BaseSet share the same set', function() {
     var schema  = new Schema('Name').type(Str)
     var schema2 = new Schema('Name2').subset(schema)
     var sets    = new Klass(Set)
