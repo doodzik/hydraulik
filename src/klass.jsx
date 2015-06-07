@@ -1,13 +1,14 @@
+import Set from './set'
+
 export default class Klass {
-  constructor(set) {
+  constructor() {
     this.sets     = {}
-    this.set      = set
     this.baseSets = {}
     this.subSets  = {}
   }
 
   push(schema) {
-    this.sets[schema.name] = new this.set(schema)
+    this.sets[schema.name] = new Set(schema)
     return this
   }
 

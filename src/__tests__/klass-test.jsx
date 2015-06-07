@@ -6,15 +6,9 @@ var Schema = require('../schema'),
     Klass  = require('../klass')
 
 describe('Klass', function() {
-  it('#new sets the schema and init set', function() {
-    var sets = new Klass('foo')
-    expect(sets.set).toEqual('foo')
-    expect(sets.sets).toEqual({})
-  })
-
   it('#register', function() {
     var schema = new Schema('Name')
-    var sets   = new Klass(Set)
+    var sets   = new Klass()
     sets.push(schema)
     expect(sets.sets.name).toEqual(new Set(schema))
   })
@@ -22,7 +16,7 @@ describe('Klass', function() {
   it('#buildSubsets subset and BaseSet share the same set', function() {
     var schema  = new Schema('Name').type(Str)
     var schema2 = new Schema('Name2').subsetOf(schema)
-    var sets    = new Klass(Set)
+    var sets    = new Klass()
     sets.push(schema)
     sets.push(schema2)
     sets.build()
@@ -36,7 +30,7 @@ describe('Klass', function() {
   it('#splitIntoBaseAndSubSets', function() {
     var schema  = new Schema('Name').type(Str)
     var schema2 = new Schema('Name2').subsetOf(schema)
-    var sets    = new Klass(Set)
+    var sets    = new Klass()
     sets.push(schema)
     sets.push(schema2)
     sets.build()
