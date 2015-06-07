@@ -16,7 +16,7 @@ describe('Klass', function() {
     var schema = new Schema('Name')
     var sets   = new Klass(Set)
     sets.push(schema)
-    expect(sets.sets.Name).toEqual(new Set(schema))
+    expect(sets.sets.name).toEqual(new Set(schema))
   })
 
   it('#buildSubsets subset and mainSet share the same set', function() {
@@ -26,11 +26,11 @@ describe('Klass', function() {
     sets.push(schema)
     sets.push(schema2)
     sets.build()
-    sets.sets.Name2.create('foo')
-    sets.sets.Name.create('bar')
-    sets.sets.Name.error['bar'] = 'baz'
-    expect(sets.sets.Name2.set).toBe(sets.sets.Name.set)
-    expect(sets.sets.Name2.error).toBe(sets.sets.Name.error)
+    sets.sets.name2.create('foo')
+    sets.sets.name.create('bar')
+    sets.sets.name.error['bar'] = 'baz'
+    expect(sets.sets.name2.set).toBe(sets.sets.name.set)
+    expect(sets.sets.name2.error).toBe(sets.sets.name.error)
   })
 
   it('#splitIntoBaseAndSubSets', function() {
@@ -40,7 +40,7 @@ describe('Klass', function() {
     sets.push(schema)
     sets.push(schema2)
     sets.build()
-    expect(sets.sets.Name2).toBe(sets.subSets.Name2)
-    expect(sets.sets.Name).toBe(sets.baseSets.Name)
+    expect(sets.sets.name2).toBe(sets.subSets.name2)
+    expect(sets.sets.name).toBe(sets.baseSets.name)
   })
 })

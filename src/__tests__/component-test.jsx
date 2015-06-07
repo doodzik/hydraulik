@@ -14,8 +14,8 @@ var Name  = new Schema('Name').type(Str).as('name')
 var sets  = new Klass(Set)
     sets.push(Name)
 
-var observerKlass  = new ObserverKlass(sets).sets
-var Names          = observerKlass.Name
+var observerSets  = new ObserverKlass(sets).sets
+var Names          = observerSets.name
 
 Names.create({ name: 'First'})
 Names.create({ name: 'Second' })
@@ -32,12 +32,12 @@ describe('ObserverSubset', function() {
     var testComp = TestUtils.renderIntoDocument(<TestComp testProp="testValue"/>)
 
     expect(testComp.props).toEqual({testProp: 'testValue'})
-    expect(testComp.state).toEqual({ Name: [ { name: 'Second' } ] })
+    expect(testComp.state).toEqual({ name: [ { name: 'Second' } ] })
 
     Names.create({ name: 'Third' })
     Names.create({ name: 'Fourth' })
 
-    expect(testComp.state).toEqual({ Name: [ { name: 'Second' }, { name: 'Third' } ] })
+    expect(testComp.state).toEqual({ name: [ { name: 'Second' }, { name: 'Third' } ] })
 
     // TODO test if test component receives values
   })
@@ -48,11 +48,11 @@ describe('ObserverSubset', function() {
     var testComp = TestUtils.renderIntoDocument(<TestComp testProp="testValue"/>)
 
     expect(testComp.props).toEqual({testProp: 'testValue'})
-    expect(testComp.state).toEqual({ NameError: { name: '' } })
+    expect(testComp.state).toEqual({ nameError: { name: '' } })
 
     Names.create({ name: '' })
 
-    expect(testComp.state).toEqual({ NameError: { name: 'Str is too short' } })
+    expect(testComp.state).toEqual({ nameError: { name: 'Str is too short' } })
 
     // TODO test if test component receives values
   })

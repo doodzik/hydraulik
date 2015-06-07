@@ -1,6 +1,6 @@
 export default class Schema {
   constructor(name) {
-    this.name           = name
+    this.name           = name.toLowerCase()
     this.types          = []
     this.subsetOf       = false
     this.filterFn       = _val => { return true }
@@ -8,13 +8,13 @@ export default class Schema {
   }
 
   type(type) {
-    var name = type.name
+    var name = type.name.toLowerCase()
     this.types.push({ type, name })
     return this
   }
 
   as(name) {
-    this.types[this.types.length-1].name = name
+    this.types[this.types.length-1].name = name.toLowerCase()
     return this
   }
 

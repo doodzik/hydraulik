@@ -49,11 +49,11 @@ describe('Set', function() {
     var schema = new Schema('Name').type(Str),
         set    = new Set(schema)
     it('fullfills', function() {
-      expect(set.validate({Str: 'long enought'})).toEqual(false)
+      expect(set.validate({str: 'long enought'})).toEqual(false)
     })
 
    it('rejects', function() {
-      expect(set.validate({Str: ''})).toEqual(true)
+      expect(set.validate({str: ''})).toEqual(true)
     })
   })
 })

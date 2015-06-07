@@ -6,7 +6,7 @@ var Schema = require('../schema'),
 describe('Schema', function() {
   it('#new sets the name', function() {
     var schema = new Schema('Name')
-    expect(schema.name).toEqual('Name')
+    expect(schema.name).toEqual('name')
   })
 
   it('#type adds new type', function() {
@@ -16,7 +16,7 @@ describe('Schema', function() {
     expect(schema.types).toEqual([
       {
         type: Str,
-        name: 'Str'
+        name: 'str'
       }
     ])
   })
@@ -26,7 +26,7 @@ describe('Schema', function() {
     expect(schema.types).toEqual([
       {
         type: Str,
-        name: 'Str'
+        name: 'str'
       }, {
         type: Str,
         name: 'text'
