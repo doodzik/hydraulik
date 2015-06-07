@@ -9,12 +9,12 @@ var React         = require('react/addons'),
     TestUtils     = React.addons.TestUtils
 
 var Name  = new Schema('Name').type(Str).as('name')
-                             .filter(val => 'Second' == val.name || 'Third' == val.name)
+                              .filter(val => 'Second' == val.name || 'Third' == val.name)
 
-var sets  = new Klass(Set)
-    sets.push(Name)
+var klass = new Klass(Set)
+    klass.push(Name)
 
-var observerSets  = new ObserverKlass(sets).sets
+var observerSets   = new ObserverKlass(klass).sets
 var Names          = observerSets.name
 
 Names.create({ name: 'First'})

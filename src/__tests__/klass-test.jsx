@@ -21,7 +21,7 @@ describe('Klass', function() {
 
   it('#buildSubsets subset and BaseSet share the same set', function() {
     var schema  = new Schema('Name').type(Str)
-    var schema2 = new Schema('Name2').subset(schema)
+    var schema2 = new Schema('Name2').subsetOf(schema)
     var sets    = new Klass(Set)
     sets.push(schema)
     sets.push(schema2)
@@ -35,7 +35,7 @@ describe('Klass', function() {
 
   it('#splitIntoBaseAndSubSets', function() {
     var schema  = new Schema('Name').type(Str)
-    var schema2 = new Schema('Name2').subset(schema)
+    var schema2 = new Schema('Name2').subsetOf(schema)
     var sets    = new Klass(Set)
     sets.push(schema)
     sets.push(schema2)

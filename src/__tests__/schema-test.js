@@ -1,7 +1,7 @@
 jest.dontMock('../schema')
 
 var Schema = require('../schema'),
-    Str = require('hydraulik-types').Str
+    Str    = require('hydraulik-types').Str
 
 describe('Schema', function() {
   it('#new sets the name', function() {
@@ -47,13 +47,13 @@ describe('Schema', function() {
     expect(schema.filterOriginal()).toEqual(true)
   })
 
-  it("#subset sets subsetOf with return value of _getBaseSet and sets filterFn with _getFilterComposition", function() {
+  it("#subsetOf sets baseSet with return value of _getBaseSet and sets filterFn with _getFilterComposition", function() {
     var schema = new Schema('Name')
-    expect(schema.subsetOf).toEqual(false)
+    expect(schema.baseSet).toEqual(false)
     schema._getBaseSet           = jest.genMockFn().mockReturnValue('hello')
     schema._getFilterComposition = jest.genMockFn().mockReturnValue('huhu')
-    expect(schema.subset('')).toEqual(schema)
-    expect(schema.subsetOf).toEqual('hello')
+    expect(schema.subsetOf('')).toEqual(schema)
+    expect(schema.baseSet).toEqual('hello')
     expect(schema.filterFn).toEqual('huhu')
   })
 
@@ -81,9 +81,9 @@ describe('Schema', function() {
 
   it("#_getBaseSet returns base set", function() {
     var schema  = new Schema('Name'),
-        schema2 = new Schema('Name2').subset(schema),
-        schema3 = new Schema('Name3').subset(schema2),
-        schema4 = new Schema('Name3').subset(schema3)
+        schema2 = new Schema('Name2').subsetOf(schema),
+        schema3 = new Schema('Name3').subsetOf(schema2),
+        schema4 = new Schema('Name3').subsetOf(schema3)
     expect(schema4._getBaseSet(schema3)).toEqual(schema)
   })
 })

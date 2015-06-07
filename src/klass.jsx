@@ -23,9 +23,9 @@ export default class Klass {
     for (var set in this.sets) {
       if (!this.sets.hasOwnProperty(set)) continue
       _set       = this.sets[set]
-      if (!_set.schema.subsetOf) continue
-      _set.set   = this.sets[_set.schema.subsetOf.name].set
-      _set.error = this.sets[_set.schema.subsetOf.name].error
+      if (!_set.schema.baseSet) continue
+      _set.set   = this.sets[_set.schema.baseSet.name].set
+      _set.error = this.sets[_set.schema.baseSet.name].error
     }
   }
 
@@ -34,7 +34,7 @@ export default class Klass {
     for (var set in this.sets) {
       if (!this.sets.hasOwnProperty(set)) continue
       _set = this.sets[set]
-      if (_set.schema.subsetOf)
+      if (_set.schema.baseSet)
         this.subSets[_set.name]  = _set
       else
         this.baseSets[_set.name] = _set

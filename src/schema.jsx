@@ -2,7 +2,7 @@ export default class Schema {
   constructor(name) {
     this.name           = name.toLowerCase()
     this.types          = []
-    this.subsetOf       = false
+    this.baseSet        = false
     this.filterFn       = _val => { return true }
     this.filterOriginal = _val => { return true } // if filterFn is overwritten keep the original filter around
   }
@@ -25,9 +25,9 @@ export default class Schema {
   }
 
   //TODO change to subsetOf
-  subset(set) {
-    this.subsetOf = this._getBaseSet(set)
-    this.filterFn = this._getFilterComposition(set)
+  subsetOf(set) {
+    this.baseSet   = this._getBaseSet(set)
+    this.filterFn  = this._getFilterComposition(set)
     return this
   }
 
@@ -37,8 +37,8 @@ export default class Schema {
 
   //TODO make static
   _getBaseSet(set) {
-    while (set.subsetOf)
-      set = set.subsetOf
+    while (set.baseSet)
+      set = set.baseSet
     return set
   }
 }
