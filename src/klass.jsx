@@ -1,5 +1,3 @@
-import Set from './set'
-
 export default class Klass {
   constructor() {
     this.sets     = {}
@@ -8,7 +6,7 @@ export default class Klass {
   }
 
   push(schema) {
-    this.sets[schema.name] = new Set(schema)
+    this.sets[schema.name] = new schema.setType(schema)
     return this
   }
 

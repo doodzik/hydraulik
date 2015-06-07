@@ -1,8 +1,11 @@
+import Set from './set'
+
 export default class Schema {
   constructor(name) {
     this.name           = name.toLowerCase()
     this.types          = []
     this.baseSet        = false
+    this.setType        = Set
     this.filterFn       = _val => { return true }
     this.filterOriginal = _val => { return true } // if filterFn is overwritten keep the original filter around
   }
