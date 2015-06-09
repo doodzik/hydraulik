@@ -1,9 +1,8 @@
 {
   "name": "hydraulik",
   "version": "0.1.0",
-  "description": "",
+  "description": "Hydraulik is an experimental framework for writing state handling React components",
   "main": "./lib/hydraulik.js",
-  "private": true,
   "scripts": {
     "test": "jest",
     "prepublish": "gulp build",
@@ -16,8 +15,8 @@
     "type": "git",
     "url": "git+https://github.com/doodzik/void.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Frederik Dudzik",
+  "license": "GNU",
   "bugs": {
     "url": "https://github.com/doodzik/void/issues"
   },
@@ -38,7 +37,7 @@
     "gulp-exec": "^2.1.1",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^3.0.4",
-    "jest-cli": "^0.4.5",
+    "jest-cli": "^0.4.7",
     "jshint": "^2.7.0",
     "react": "^0.13.3"
   },

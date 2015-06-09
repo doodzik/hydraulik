@@ -28,9 +28,9 @@ export default class Schema {
   }
 
   //TODO change to subsetOf
-  subsetOf(set) {
-    this.baseSet   = this._getBaseSet(set)
-    this.filterFn  = this._getFilterComposition(set)
+  subsetOf(schema) {
+    this.baseSet   = this._getBaseSet(schema)
+    this.filterFn  = this._getFilterComposition(schema)
     return this
   }
 
