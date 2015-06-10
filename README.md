@@ -26,10 +26,10 @@ exports all classes that should be accessible through `import * from 'hydraulik'
 ###klass.jsx
 The [Class] (http://en.wikipedia.org/wiki/Class_(set_theory)) contains all sets.
 It makes that the BaseSet and SubSet share the same storage.
+Converts sets into observed sets
 
-###observerKlass.jsx  
-This class file is going to be merged with klass.jsx
-Creates converts sets into observed set
+TODO mv Build into own module(NOT A CLASS)
+
 
 ###observerSet.jsx
 inherits from observerSubset and registers new action to the dispatcher
@@ -133,7 +133,7 @@ var UserCreateState = users.ComponentError(class UserCreate {
 // ...
 ```
 #API
-##Schema
+##Schema - Set
 
 ###`new Schema(name: String)`
 
@@ -158,7 +158,7 @@ Takes a schema and composes it's filter with the subset filter: `filter && filte
 
 ##ObserverSet/ObserverSubset
 
-instances of the ObserverSet/ObserverSubset are stored in the Klass instance variable sets. `new ObserverKlass(klass).sets`
+instances of the ObserverSet/ObserverSubset are stored in the Klass instance variable sets.
 
 ###`create(argObj: Object)`
 

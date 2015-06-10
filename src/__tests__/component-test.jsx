@@ -3,7 +3,6 @@ jest.autoMockOff()
 var React         = require('react/addons'),
     Schema        = require('../schema'),
     Klass         = require('../klass'),
-    ObserverKlass = require('../observerKlass'),
     Str           = require('hydraulik-types').Str,
     TestUtils     = React.addons.TestUtils
 
@@ -13,8 +12,9 @@ var Name  = new Schema('Name').type(Str).as('name')
 var klass = new Klass()
     klass.push(Name)
 
-var observerSets   = new ObserverKlass(klass).sets
-var Names          = observerSets.name
+var Names          = klass.sets.name
+// var observerSets   = new ObserverKlass(klass).sets
+// var Names          = observerSets.name
 
 Names.create({ name: 'First'})
 Names.create({ name: 'Second' })
