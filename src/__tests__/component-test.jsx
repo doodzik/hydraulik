@@ -6,18 +6,27 @@ var React         = require('react/addons'),
     Str           = require('hydraulik-types').Str,
     TestUtils     = React.addons.TestUtils
 
-var Name  = new Schema('Name').type(Str).as('name')
-                              .filter(val => 'Second' == val.name || 'Third' == val.name)
+var User  = new Schema('Users').type(Str).as('name')
+                              .filter(user => 'Second' == user.name || 'Third' == user.name)
+
+var User2 = new Schema('Users2').type(Str).as('name')
+                              .filter(user => 'Second' == user.name || 'Third' == user.name)
+
+var User3 = new Schema('Users3').subsetOf(User2).filter(user => 'Third' == user.name)
+
 
 var klass = new Klass()
-    klass.push(Name)
+    klass.push(User)
+    klass.push(User3)
+    klass.push(User2)
 
-var Names          = klass.sets.name
-// var observerSets   = new ObserverKlass(klass).sets
-// var Names          = observerSets.name
+var Users  = klass.sets.users,
+    Users3 = klass.sets.users3,
+    Users2 = klass.sets.users2
 
-Names.create({ name: 'First'})
-Names.create({ name: 'Second' })
+Users.create({ name: 'First'})
+Users.create({ name: 'Second' })
+Users2.create({ name: 'Second' })
 
 class Test {
   render(){
@@ -25,33 +34,48 @@ class Test {
   }
 }
 
-describe('ObserverSubset', function() {
+describe('Component ObserverSet/Subset', function() {
   it('#Component', function() {
-    var TestComp = Names.Component(Test)
+    var TestComp = Users.Component(Test)
     var testComp = TestUtils.renderIntoDocument(<TestComp testProp="testValue"/>)
 
     expect(testComp.props).toEqual({testProp: 'testValue'})
-    expect(testComp.state).toEqual({ name: [ { name: 'Second' } ] })
+    expect(testComp.state).toEqual({ users: [ { name: 'Second' } ] })
 
-    Names.create({ name: 'Third' })
-    Names.create({ name: 'Fourth' })
+    Users.create({ name: 'Third' })
+    Users.create({ name: 'Fourth' })
 
-    expect(testComp.state).toEqual({ name: [ { name: 'Second' }, { name: 'Third' } ] })
+    expect(testComp.state).toEqual({ users: [ { name: 'Second' }, { name: 'Third' } ] })
 
     // TODO test if test component receives values
   })
 
 
   it('#ComponentError', function() {
-    var TestComp = Names.ComponentError(Test)
+    var TestComp = Users.ComponentError(Test)
     var testComp = TestUtils.renderIntoDocument(<TestComp testProp="testValue"/>)
 
     expect(testComp.props).toEqual({testProp: 'testValue'})
-    expect(testComp.state).toEqual({ nameError: { name: '' } })
+    expect(testComp.state).toEqual({ users_error: { name: '' } })
 
-    Names.create({ name: '' })
+    Users.create({ name: '' })
 
-    expect(testComp.state).toEqual({ nameError: { name: 'Str is too short' } })
+    expect(testComp.state).toEqual({ users_error: { name: 'Str is too short' } })
+
+    // TODO test if test component receives values
+  })
+
+  it('#Component subsetOf', function() {
+    var TestComp = Users3.Component(Test)
+    var testComp = TestUtils.renderIntoDocument(<TestComp testProp="testValue"/>)
+
+    expect(testComp.props).toEqual({testProp: 'testValue'})
+    expect(testComp.state).toEqual({ users3: [] })
+
+    Users2.create({ name: 'Third' })
+    Users2.create({ name: 'Fourth' })
+
+    expect(testComp.state).toEqual({ users3: [{ name: 'Third' }] })
 
     // TODO test if test component receives values
   })

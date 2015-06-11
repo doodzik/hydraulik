@@ -44,7 +44,7 @@ describe('ObserverSubset', function() {
     it('#getStateObjError', function() {
       observerSet = new ObserverSubset(set, dispatcher)
       expect(observerSet.getStateObjError()).toEqual({
-        NameError: { foo: 'bar' }
+        Name_error: { foo: 'bar' }
       })
     })
   })

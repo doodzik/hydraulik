@@ -10,7 +10,7 @@ export default class Set {
   }
 
   read(props){
-    return this.set.filter((val) => {
+    return this.set.filter(val => {
       val['props'] = props
       returnVal    = this.schema.filterFn(val)
       delete val['props']

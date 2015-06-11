@@ -20,7 +20,7 @@ export default class ObserverSubset {
   }
 
   getStateObjError(){
-    return { [this.set.name + 'Error']: this.set.error }
+    return { [this.set.name + '_error']: this.set.error }
   }
 
   Component(ComposedComponent) {

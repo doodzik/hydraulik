@@ -25,11 +25,11 @@ exports all classes that should be accessible through `import * from 'hydraulik'
 
 ###klass.jsx
 The [Class] (http://en.wikipedia.org/wiki/Class_(set_theory)) contains all sets.
+Builds sets if #sets is called the first time. Build with the klassBuilder.
+
+###klassBuilder.jsx
 It makes that the BaseSet and SubSet share the same storage.
 Converts sets into observed sets
-
-TODO mv Build into own module(NOT A CLASS)
-
 
 ###observerSet.jsx
 inherits from observerSubset and registers new action to the dispatcher
@@ -78,7 +78,7 @@ var Users  = new Schema('Users')
 
 var User   = new Schema('Users')
                 .type(Str).as('name')
-                .filter(val => val.params.name == val.name)
+                .filter(user => user.params.name == user.name)
 
 var klass = new Klass()
     klass.push(Users)
