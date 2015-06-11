@@ -1,17 +1,18 @@
 import ObserverSet    from './observerSet'
 import ObserverSubset from './observerSubset'
 
-var compare = function (sets) {
-  return function(setA, setB) {
-    if (sets[setA].schema.baseSet)
-      return 1
-    return 0
-  }
+export var filterSplit = function(array, fun) {
+  var resTrue  = [],
+      resFalse = [],
+      len      = array.length
+  array.forEach(val => (fun(val)) ? resTrue.push(val) : resFalse.push(val))
+  return [resTrue, resFalse]
 }
 
-export var sortedKeys = function (sets) {
-  var keys = Object.keys(sets)
-  return keys.sort(compare(sets))
+export var isBaseSet = function (sets) {
+  return function(set) {
+    return !(sets[set].schema.baseSet)
+  }
 }
 
 export var setStoreOfSubset = function (sets, set) {
@@ -20,17 +21,17 @@ export var setStoreOfSubset = function (sets, set) {
 }
 
 export default function (sets, dispatcher) {
-  sortedKeys(sets).forEach(set => {
-    let _set      = sets[set],
-        baseEvent
+  var keys = Object.keys(sets)
+  var [baseSets, subSets] = filterSplit(keys, isBaseSet(sets))
 
-    if (!_set.schema.baseSet)
-      sets[set] = new ObserverSet(_set, dispatcher)
-    else {
-      setStoreOfSubset(sets, _set)
-      baseEvent = sets[_set.schema.baseSet.name].events // uses baseSet events
-      sets[set] = new ObserverSubset(_set, dispatcher, baseEvent)
-    }
+  baseSets.forEach(set => sets[set] = new ObserverSet(sets[set], dispatcher))
+
+  subSets.forEach(set => {
+    let _set      = sets[set],
+        baseEvent = sets[_set.schema.baseSet.name].events // uses baseSet events
+    setStoreOfSubset(sets, _set)
+    sets[set] = new ObserverSubset(_set, dispatcher, baseEvent)
   })
+
   return sets
 }
