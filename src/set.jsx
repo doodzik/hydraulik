@@ -4,6 +4,7 @@ export default class Set {
   constructor(schema) {
     this.schema     = schema
     this.set        = []
+    this.default    = []
     this.error      = {}
     this.name       = schema.name
     this.actionType = this.name + '_CREATE'
@@ -11,8 +12,8 @@ export default class Set {
 
   read(props){
     return this.set.filter(val => {
-      val['props'] = props
-      returnVal    = this.schema.filterFn(val)
+      val['props']  = props
+      var returnVal = this.schema.filterFn(val)
       delete val['props']
       return returnVal
     })

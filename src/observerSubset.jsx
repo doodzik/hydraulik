@@ -19,6 +19,10 @@ export default class ObserverSubset {
     return { [this.set.name]: this.set.read(props) }
   }
 
+  getStateDefault(){
+    return { [this.set.name]: this.set.default }
+  }
+
   getStateObjError(){
     return { [this.set.name + '_error']: this.set.error }
   }
@@ -28,10 +32,11 @@ export default class ObserverSubset {
     return class extends Component {
       constructor() {
         super()
-        this.state = _this.getStateObj(this.props)
+        this.state = _this.getStateDefault()
       }
 
       componentDidMount() {
+        this.setState(_this.getStateObj(this.props))
         _this.events.addChangeListener(this._onChangeFn.bind(this))
       }
 
