@@ -35,6 +35,10 @@ export default class ObserverSubset {
         this.state = _this.getStateDefault()
       }
 
+      componentWillReceiveProps(nextProps) {
+        this.setState(_this.getStateObj(nextProps))
+      }
+
       componentDidMount() {
         this.setState(_this.getStateObj(this.props))
         _this.events.addChangeListener(this._onChangeFn.bind(this))
