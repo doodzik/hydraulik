@@ -1,6 +1,6 @@
 {
   "name": "hydraulik",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Hydraulik is an experimental framework for writing state handling React components",
   "main": "./lib/hydraulik.js",
   "scripts": {
@@ -37,7 +37,7 @@
     "gulp-exec": "^2.1.1",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^3.0.4",
-    "jest-cli": "^0.4.7",
+    "jest-cli": "^0.4.13",
     "jshint": "^2.7.0",
     "react": "^0.13.3"
   },

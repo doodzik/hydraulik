@@ -31,3 +31,5 @@ public/bundle.js
 npm-debug.log
 
 lib
+
+.changes

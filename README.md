@@ -69,16 +69,19 @@ $ npm install
 There is a separate documentation for the [cli] (https://github.com/doodzik/hydraulik-cli) and [types] (https://github.com/doodzik/hydraulik-types) available.
 
 ```jsx
-import React, { Component } from 'react'
-import { Schema, Klass }    from 'hydraulik'
-import { Str }              from 'hydraulik-types'
+import React, { Component }     from 'react'
+import { Schema, type, Klass }  from 'hydraulik'
+import { Str }                  from 'hydraulik-types'
 
-var Users  = new Schema('Users')
-                .type(Str).as('name')
+@type(Str, name = 'name')
+class Users extend Schema {
+}
 
-var User   = new Schema('Users')
-                .type(Str).as('name')
-                .filter(user => user.params.name == user.name)
+class User extend Users {
+    filter(user) {
+      return super.filter(user) && user.params.name == user.name
+    }
+}
 
 var klass = new Klass()
     klass.push(Users)
@@ -91,8 +94,7 @@ users.create({ name: 'testName'})
 users.create({ name: 'Second' })
 
 // these components automatically listen for changed data and rerender automatically
-
-var UserList = users.Component(class Users {
+var UserList = users.Component(class {
   render(){
     var lis = this.params.users.map(user => <li>user.name</li>)
     return(<ul>{ lis }</ul>)
@@ -135,26 +137,14 @@ var UserCreateState = users.ComponentError(class UserCreate {
 #API
 ##Schema - Set
 
-###`new Schema(name: String)`
-
-name is the name of the new Schema instance.
-
-###`type(type: Type)`
+###`@type(type: Type, [name = typeName])`
 
 Takes a Type that implement this [interface] (https://github.com/doodzik/hydraulik-types).
 The name of the type is the Types name downcased.
 
-###`as(name: String)`
-
-The `as` method takes a string and renames the last added type to this name.
-
-###`filter(filterFn: function(val))`
+###`#filter(filterFn: function(val))`
 
 filters the set. FilterFn has to return a boolean. Val is an element of the set. You can access args from outside via val.params
-
-###`subsetOf(schema: Schema)`
-
-Takes a schema and composes it's filter with the subset filter: `filter && filterSubset`
 
 ##ObserverSet/ObserverSubset
 

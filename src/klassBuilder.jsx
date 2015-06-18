@@ -11,13 +11,13 @@ export var filterSplit = function(array, fun) {
 
 export var isBaseSet = function (sets) {
   return function(set) {
-    return !(sets[set].schema.baseSet)
+    return !(sets[set].baseSet)
   }
 }
 
 export var setStoreOfSubset = function (sets, set) {
-  set.set   = sets[set.schema.baseSet.name].set.set
-  set.error = sets[set.schema.baseSet.name].set.error
+  set.set   = sets[set.baseSet].set.set
+  set.error = sets[set.baseSet].set.error
 }
 
 export default function (sets, dispatcher) {
@@ -28,7 +28,7 @@ export default function (sets, dispatcher) {
 
   subSets.forEach(set => {
     let _set      = sets[set],
-        baseEvent = sets[_set.schema.baseSet.name].events // uses baseSet events
+        baseEvent = sets[_set.baseSet].events // uses baseSet events
     setStoreOfSubset(sets, _set)
     sets[set] = new ObserverSubset(_set, dispatcher, baseEvent)
   })

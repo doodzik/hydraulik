@@ -1,18 +1,21 @@
 jest.dontMock('../schema')
 
-var Schema = require('../schema'),
+var Schema = require('../schema').default,
+    type   = require('../schema').type,
     Str    = require('hydraulik-types').Str
+
 
 describe('Schema', function() {
   it('#new sets the name', function() {
-    var schema = new Schema('Name')
-    expect(schema.name).toEqual('name')
+    class Users extends Schema {}
+    var schema = new Users()
+    expect(schema.name).toEqual('users')
   })
 
-  it('#type adds new type', function() {
-    var schema = new Schema('')
-    expect(schema.types).toEqual([])
-    schema.type(Str)
+  it('@type', function() {
+    @type(Str)
+    class Users extends Schema {}
+    var schema = new Users()
     expect(schema.types).toEqual([
       {
         type: Str,
@@ -21,69 +24,45 @@ describe('Schema', function() {
     ])
   })
 
-  it('#as changes name of last added type', function() {
-    var schema = new Schema('').type(Str).type(Str).as('text')
+  it('@type changes name of type', function() {
+    @type(Str, name = 'text')
+    class Users extends Schema {}
+    var schema = new Users()
     expect(schema.types).toEqual([
       {
-        type: Str,
-        name: 'str'
-      }, {
         type: Str,
         name: 'text'
       }
     ])
   })
 
-  it("#filter sets filter and returns this", function() {
-    var schema = new Schema('Name')
-    expect(schema.filter('hello')).toEqual(schema)
-    expect(schema.filterFn).toEqual('hello')
-    expect(schema.filterOriginal).toEqual('hello')
+  it('@type is chainable', function() {
+    @type(Str)
+    @type(Str, name = 'text')
+    class Users extends Schema {}
+    var schema = new Users()
+    expect(schema.types).toEqual([
+      {
+        type: Str,
+        name: 'text'
+      }, {
+        type: Str,
+        name: 'str'
+      }
+    ])
   })
 
-  it("#filterFn if filter isn't called than function that returns true", function() {
-    var schema = new Schema('Name')
-    expect(schema.filterFn()).toEqual(true)
-    expect(schema.filterOriginal()).toEqual(true)
+  it("#filter if filter isn't called than function that returns true", function() {
+    var schema = new Schema()
+    expect(schema.filter()).toEqual(true)
   })
 
-  it("#subsetOf sets baseSet with return value of _getBaseSet and sets filterFn with _getFilterComposition", function() {
-    var schema = new Schema('Name')
-    expect(schema.baseSet).toEqual(false)
-    schema._getBaseSet           = jest.genMockFn().mockReturnValue('hello')
-    schema._getFilterComposition = jest.genMockFn().mockReturnValue('huhu')
-    expect(schema.subsetOf('')).toEqual(schema)
-    expect(schema.baseSet).toEqual('hello')
-    expect(schema.filterFn).toEqual('huhu')
-  })
-
-  it("#_getFilterComposition composese parent with child filters", function() {
-    var schema  = new Schema('Name'),
-        schema2 = new Schema('Name2')
-    schema.filterFn        = jest.genMockFn().mockReturnValue(true)
-    schema2.filterOriginal = jest.genMockFn().mockReturnValue(true)
-    filter = schema2._getFilterComposition(schema)
-    expect(filter({})).toBeTruthy()
-    expect(schema.filterFn).toBeCalled()
-    expect(schema2.filterOriginal).toBeCalled()
-  })
-
-  it("#_getFilterComposition returns false when one fails", function() {
-    var schema  = new Schema('Name'),
-        schema2 = new Schema('Name2')
-    schema.filterFn        = jest.genMockFn().mockReturnValue(false)
-    schema2.filterOriginal = jest.genMockFn().mockReturnValue(true)
-    filter = schema2._getFilterComposition(schema)
-    expect(filter({})).toBeFalsy()
-    expect(schema.filterFn).toBeCalled()
-    expect(schema2.filterOriginal).not.toBeCalled()
-  })
-
-  it("#_getBaseSet returns base set", function() {
-    var schema  = new Schema('Name'),
-        schema2 = new Schema('Name2').subsetOf(schema),
-        schema3 = new Schema('Name3').subsetOf(schema2),
-        schema4 = new Schema('Name3').subsetOf(schema3)
-    expect(schema4._getBaseSet(schema3)).toEqual(schema)
+  it("subsetOf", function() {
+    class Users  extends Schema {}
+    class Admins extends Users {}
+    var users  = new Users(),
+        admins = new Admins()
+    expect(users.baseSet).toEqual(false)
+    expect(admins.baseSet).toEqual('users')
   })
 })
