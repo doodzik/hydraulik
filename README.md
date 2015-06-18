@@ -79,7 +79,7 @@ class Users extend Schema {
 
 class User extend Users {
     filter(user) {
-      return super(user) && user.params.name == user.name
+      return super.filter(user) && user.params.name == user.name
     }
 }
 
@@ -94,7 +94,7 @@ users.create({ name: 'testName'})
 users.create({ name: 'Second' })
 
 // these components automatically listen for changed data and rerender automatically
-var UserList = users.Component(class Users {
+var UserList = users.Component(class {
   render(){
     var lis = this.params.users.map(user => <li>user.name</li>)
     return(<ul>{ lis }</ul>)

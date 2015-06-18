@@ -1,47 +1,39 @@
 import Set from './set'
 
+export var type = function (type, name = false) {
+   return function decorator(target) {
+      target.types = target.types || []
+      name         = name || type.name.toLowerCase()
+      target.types.push({ type, name })
+      return target
+   }
+}
+
 export default class Schema {
-  constructor(name) {
-    this.name           = name.toLowerCase()
-    this.types          = []
-    this.baseSet        = false
-    this.setType        = Set
-    this.filterFn       = _val => { return true }
-    this.filterOriginal = _val => { return true } // if filterFn is overwritten keep the original filter around
+  constructor() {
+    this.name = this.constructor.name.toLowerCase()
+    this.set  = Set
+    this.setBaseSet()
   }
 
-  type(type) {
-    var name = type.name.toLowerCase()
-    this.types.push({ type, name })
-    return this
+  filter(val) {
+    return true
   }
 
-  as(name) {
-    this.types[this.types.length-1].name = name.toLowerCase()
-    return this
+  get types (){
+    return this.constructor.types
   }
 
-  filter(filterFn){
-    this.filterFn       = filterFn
-    this.filterOriginal = filterFn
-    return this
-  }
+  setBaseSet() {
+    var _this  = this.constructor,
+        _super = Object.getPrototypeOf(_this)
 
-  //TODO change to subsetOf
-  subsetOf(schema) {
-    this.baseSet   = this._getBaseSet(schema)
-    this.filterFn  = this._getFilterComposition(schema)
-    return this
-  }
+    while(_super != Schema && _this != Schema) {
+      _this  = _super
+      _super = Object.getPrototypeOf(_this)
+    }
 
-  _getFilterComposition(set) {
-    return val => { return set.filterFn(val) && this.filterOriginal(val) }
-  }
-
-  //TODO make static
-  _getBaseSet(set) {
-    while (set.baseSet)
-      set = set.baseSet
-    return set
+    this.baseSet = (_this == this.constructor) ? false : new _this().name
   }
 }
+

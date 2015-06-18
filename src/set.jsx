@@ -2,8 +2,10 @@ import { StrError } from 'hydraulik-types'
 
 export default class Set {
   constructor(schema) {
+    schema          = new schema()
     this.schema     = schema
     this.set        = []
+    this.baseSet    = schema.baseSet
     this.default    = []
     this.error      = {}
     this.name       = schema.name
@@ -13,7 +15,7 @@ export default class Set {
   read(props){
     return this.set.filter(val => {
       val['props']  = props
-      var returnVal = this.schema.filterFn(val)
+      var returnVal = this.schema.filter(val)
       delete val['props']
       return returnVal
     })
