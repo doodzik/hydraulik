@@ -1,6 +1,6 @@
 {
   "name": "hydraulik",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Hydraulik is an experimental framework for writing state handling React components",
   "main": "./lib/hydraulik.js",
   "scripts": {
