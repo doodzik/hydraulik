@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/doodzik/void.git"
+    "url": "git+https://github.com/doodzik/hydraulik.git"
   },
   "author": "Frederik Dudzik",
   "license": "GNU",
   "bugs": {
-    "url": "https://github.com/doodzik/void/issues"
+    "url": "https://github.com/doodzik/hydraulik/issues"
   },
-  "homepage": "https://github.com/doodzik/void#readme",
+  "homepage": "https://github.com/doodzik/hydraulik#readme",
   "dependencies": {
     "flux": "^2.0.3",
     "hydraulik-cli": "0.0.2",

@@ -1,4 +1,8 @@
-## Version 0.0.3 2015-06-16
+## Version 0.0.4 2015-06-18
+
+export Type decorator
+
+## Version 0.0.3 2015-06-18
 
 change schema dsl to use es6 class syntax and es7 decorators
 

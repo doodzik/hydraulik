@@ -97,13 +97,13 @@ users.create({ name: 'Second' })
 var UserList = users.Component(class {
   render(){
     var lis = this.params.users.map(user => <li>user.name</li>)
-    return(<ul>{ lis }</ul>)
+    return <ul>{ lis }</ul>
   }
 }
 
 var UserShow = user.Component(class User {
   render(){
-    return(<div>{this.params.user[0].name}</div>)
+    return <div>{this.params.user[0].name}</div>
   }
 })
 
@@ -126,7 +126,7 @@ var UserCreateState = users.ComponentError(class UserCreate {
 
 // ...
   render(){
-    return(
+    return (
       <UserList />
       <UserShow name={'testName'} />
       <UserCreateState />
