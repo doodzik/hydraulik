@@ -13,12 +13,22 @@ export default class Set {
   }
 
   read(props){
-    return this.set.filter(val => {
-      val['props']  = props
-      var returnVal = this.schema.filter(val)
-      delete val['props']
-      return returnVal
-    })
+    var res = []
+    var len = this.set.length >>> 0
+
+    for (var i = 0; i < len; i++) {
+      if (i in this.set) {
+        var val       = this.set[i]
+        val['props']  = props
+        var returnVal = this.schema.filter(val)
+        if (returnVal) {
+          res.push(val)
+        }
+        delete val['props']
+      }
+    }
+
+    return res;
   }
 
   create(arg){
