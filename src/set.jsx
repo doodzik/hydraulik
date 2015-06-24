@@ -26,8 +26,12 @@ export default class Set {
         var returnVal = this.schema.filter(val)
         if (returnVal) {
           matched++
-          if(!skip || matched > skip)
-            res.push(val)
+          if(!skip || matched > skip) {
+            if(limit !== 1)
+              res.push(val)
+            else
+              res = val
+          }
         }
         delete val['props']
         if(limit && limit == matched)

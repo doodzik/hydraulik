@@ -70,6 +70,19 @@ describe('Set', function() {
     expect(set.read()).toEqual(['hello', 'huhuhu'])
   })
 
+  it('#read filters elements and limit with 1 returns it without the array', function() {
+    class User extends Schema {
+      @limit(1)
+      filter(val) {
+        return true
+      }
+    }
+    var set                 = new Set(User)
+    set.set                 = ['hello', 'huhuhu', 'beubte']
+    expect(set.read()).toEqual('hello')
+  })
+
+
   it('#read filters elements and skips it with skip prop', function() {
     class User extends Schema {
       @skip()

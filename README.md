@@ -158,6 +158,7 @@ if skip is 0 nothing is skiped
 @limit(int) limits as many as are defined for int
 
 if limit is 0 nothing is limited
+if limit is 1 it returns the element without the surrounding array 
 
 ###`#filter(filterFn: function(val))`
 
