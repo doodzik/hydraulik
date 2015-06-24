@@ -1,3 +1,11 @@
+## Version 0.0.5 2015-06-24
+
+remove hydraulik-cli as dependency
+add limit decorator to Schema
+add skip  decorator to Schema
+add destroy operation to public interface
+add update operation to public interface
+
 ## Version 0.0.4 2015-06-18
 
 export Type decorator

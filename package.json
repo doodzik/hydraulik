@@ -1,15 +1,12 @@
 {
   "name": "hydraulik",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Hydraulik is an experimental library for writing state handling React components",
   "main": "./lib/hydraulik.js",
   "scripts": {
     "test": "jest",
     "prepublish": "gulp build",
     "postpublish": "gulp tag"
-  },
-  "bin": {
-    "hydraulik": "./node_modules/.bin/hydraulik"
   },
   "repository": {
     "type": "git",
@@ -23,7 +20,6 @@
   "homepage": "https://github.com/doodzik/hydraulik#readme",
   "dependencies": {
     "flux": "^2.0.3",
-    "hydraulik-cli": "0.0.2",
     "hydraulik-types": "0.0.1",
     "object-assign": "^2.0.0",
     "react": "^0.13.3"

@@ -60,7 +60,7 @@ Requirements: [nvm] (https://github.com/creationix/nvm)
 ```bash
 $ mkdir projectName
 $ cd $_ && npm init && npm install hydraulik-cli --save-dev
-# add "hydraulik": "./node_modules/.bin/hydraulik-cli" to your package.json file in the script section
+# add "hydraulik": "./node_modules/.bin/hydraulik" to your package.json file in the script section
 $ npm run hydraulik -- init
 $ npm install
 ```
