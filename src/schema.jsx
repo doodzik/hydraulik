@@ -11,7 +11,7 @@ export var type = function (type, name = false) {
 
 export var skip = function(val) {
    return function decorator(target, name, descriptor) {
-      target.skip = val
+      target.skip = (typeof val === 'undefined') ? true : val
       return descriptor
    }
 }

@@ -15,7 +15,8 @@ export default class Set {
   read(props){
     var res = []
         len = this.set.length >>> 0,
-        matched = 0
+        matched = 0,
+        skip = (this.schema.skip === true) ? (props.skip || 0) : this.schema.skip
 
     for (var i = 0; i < len; i++) {
       if (i in this.set) {
@@ -24,7 +25,7 @@ export default class Set {
         var returnVal = this.schema.filter(val)
         if (returnVal) {
           matched++
-          if(this.skip === false || matched > this.schema.skip)
+          if(skip === false || matched > skip)
             res.push(val)
         }
         delete val['props']

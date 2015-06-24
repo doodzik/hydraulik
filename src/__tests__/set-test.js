@@ -57,6 +57,18 @@ describe('Set', function() {
     expect(set.read()).toEqual(['beubte'])
   })
 
+  it('#read filters elements and skips it with skip prop', function() {
+    class User extends Schema {
+      @skip()
+      filter(val) {
+        return true
+      }
+    }
+    var set                 = new Set(User)
+    set.set                 = ['hello', 'huhuhu', 'beubte']
+    expect(set.read({skip: 2})).toEqual(['beubte'])
+  })
+
   it('#create returns the set', function() {
     class User extends Schema {}
     var set = new Set(User)

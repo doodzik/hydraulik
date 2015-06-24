@@ -53,7 +53,7 @@ describe('Schema', function() {
     ])
   })
 
-  it('@type', function() {
+  it('@skip', function() {
     class Users extends Schema {
       @skip(3)
       filter(val) {
@@ -65,6 +65,18 @@ describe('Schema', function() {
     expect(users.skip).toEqual(3)
     var schema = new Schema()
     expect(schema.skip).toEqual(false)
+  })
+
+  it('@skip with no args', function() {
+    class Users extends Schema {
+      @skip()
+      filter(val) {
+        return true
+      }
+    }
+
+    var users = new Users()
+    expect(users.skip).toEqual(true)
   })
 
   it("#filter if filter isn't called than function that returns true", function() {
