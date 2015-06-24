@@ -16,11 +16,19 @@ export var skip = function(val) {
    }
 }
 
+export var limit = function(val) {
+   return function decorator(target, name, descriptor) {
+      target.limit = val
+      return descriptor
+   }
+}
+
 export default class Schema {
   constructor() {
-    this.name = this.constructor.name.toLowerCase()
-    this.set  = Set
-    this.skip = this.skip || false
+    this.name  = this.constructor.name.toLowerCase()
+    this.set   = Set
+    this.skip  = this.skip  || 0
+    this.limit = this.limit || 0
     this.setBaseSet()
   }
 

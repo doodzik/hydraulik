@@ -13,10 +13,11 @@ export default class Set {
   }
 
   read(props){
-    var res = []
-        len = this.set.length >>> 0,
+    var res     = []
+        len     = this.set.length >>> 0,
         matched = 0,
-        skip = (this.schema.skip === true) ? (props.skip || 0) : this.schema.skip
+        skip    = (this.schema.skip === true) ? (props.skip || 0) : this.schema.skip,
+        limit   = (this.schema.limit === true) ? (props.limit || 0) : this.schema.limit
 
     for (var i = 0; i < len; i++) {
       if (i in this.set) {
@@ -25,13 +26,14 @@ export default class Set {
         var returnVal = this.schema.filter(val)
         if (returnVal) {
           matched++
-          if(skip === false || matched > skip)
+          if(!skip || matched > skip)
             res.push(val)
         }
         delete val['props']
+        if(limit && limit == matched)
+          break
       }
     }
-
     return res;
   }
 

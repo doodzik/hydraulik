@@ -51,6 +51,7 @@ The events an observer set listens to.
 ##Roadmap
 
 The next step for this Project is to provide different Set types. The Set types should implement different storage types and different ways to interact with them.
+And to remove the need to register a schema manually.
 
 #Installation
 
@@ -78,6 +79,7 @@ class Users extend Schema {
 }
 
 class User extend Users {
+    @limit()
     @skip()
     filter(user) {
       return super.filter(user) && user.params.name == user.name
@@ -145,8 +147,17 @@ The name of the type is the Types name downcased.
 
 ###`@skip([val: Int])`
 
-@skip() skips as many matches as provided in props.skip. defaults to null if props.skip isn't defined
+@skip() skips as many matches as provided in props.skip. defaults to 0 if props.skip isn't defined
 @skip(int) skips as many as are defined for int
+
+if skip is 0 nothing is skiped
+
+###`@limit([val: Int])`
+
+@limit() limits as many matches as provided in props.limit. defaults to 0 if props.limit isn't defined
+@limit(int) limits as many as are defined for int
+
+if limit is 0 nothing is limited
 
 ###`#filter(filterFn: function(val))`
 

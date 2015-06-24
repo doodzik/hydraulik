@@ -3,6 +3,7 @@ jest.dontMock('../schema')
 var Schema = require('../schema').default,
     type   = require('../schema').type,
     skip   = require('../schema').skip,
+    limit  = require('../schema').limit,
     Str    = require('hydraulik-types').Str
 
 
@@ -53,6 +54,20 @@ describe('Schema', function() {
     ])
   })
 
+  it('@limit', function() {
+    class Users extends Schema {
+      @limit(3)
+      filter(val) {
+        return true
+      }
+    }
+
+    var users = new Users()
+    expect(users.limit).toEqual(3)
+    var schema = new Schema()
+    expect(schema.limit).toEqual(0)
+  })
+
   it('@skip', function() {
     class Users extends Schema {
       @skip(3)
@@ -64,7 +79,7 @@ describe('Schema', function() {
     var users = new Users()
     expect(users.skip).toEqual(3)
     var schema = new Schema()
-    expect(schema.skip).toEqual(false)
+    expect(schema.skip).toEqual(0)
   })
 
   it('@skip with no args', function() {
