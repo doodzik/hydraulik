@@ -70,7 +70,7 @@ There is a separate documentation for the [cli] (https://github.com/doodzik/hydr
 
 ```jsx
 import React, { Component }     from 'react'
-import { Schema, type, Klass }  from 'hydraulik'
+import { Schema, type, skip, Klass }  from 'hydraulik'
 import { Str }                  from 'hydraulik-types'
 
 @type(Str, name = 'name')
@@ -78,6 +78,7 @@ class Users extend Schema {
 }
 
 class User extend Users {
+    @skip()
     filter(user) {
       return super.filter(user) && user.params.name == user.name
     }
@@ -141,6 +142,11 @@ var UserCreateState = users.ComponentError(class UserCreate {
 
 Takes a Type that implement this [interface] (https://github.com/doodzik/hydraulik-types).
 The name of the type is the Types name downcased.
+
+###`@skip([val: Int])`
+
+@skip() skips as many matches as provided in props.skip. defaults to null if props.skip isn't defined
+@skip(int) skips as many as are defined for int
 
 ###`#filter(filterFn: function(val))`
 
