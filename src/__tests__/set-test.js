@@ -2,6 +2,7 @@ jest.autoMockOff()
 
 var Schema = require('../schema').default,
     type   = require('../schema').type,
+    skip   = require('../schema').skip,
     Set    = require('../set'),
     Str    = require('hydraulik-types').Str
 
@@ -42,6 +43,18 @@ describe('Set', function() {
     var set                 = new Set(User)
     set.set                 = ['hello', 'huhuhu', 'beubte']
     expect(set.read()).toEqual(['huhuhu'])
+  })
+
+  it('#read filters elements and skips it', function() {
+    class User extends Schema {
+      @skip(2)
+      filter(val) {
+        return true
+      }
+    }
+    var set                 = new Set(User)
+    set.set                 = ['hello', 'huhuhu', 'beubte']
+    expect(set.read()).toEqual(['beubte'])
   })
 
   it('#create returns the set', function() {

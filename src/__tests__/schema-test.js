@@ -2,6 +2,7 @@ jest.dontMock('../schema')
 
 var Schema = require('../schema').default,
     type   = require('../schema').type,
+    skip   = require('../schema').skip,
     Str    = require('hydraulik-types').Str
 
 
@@ -50,6 +51,20 @@ describe('Schema', function() {
         name: 'str'
       }
     ])
+  })
+
+  it('@type', function() {
+    class Users extends Schema {
+      @skip(3)
+      filter(val) {
+        return true
+      }
+    }
+
+    var users = new Users()
+    expect(users.skip).toEqual(3)
+    var schema = new Schema()
+    expect(schema.skip).toEqual(false)
   })
 
   it("#filter if filter isn't called than function that returns true", function() {

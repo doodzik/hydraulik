@@ -14,7 +14,8 @@ export default class Set {
 
   read(props){
     var res = []
-    var len = this.set.length >>> 0
+        len = this.set.length >>> 0,
+        matched = 0
 
     for (var i = 0; i < len; i++) {
       if (i in this.set) {
@@ -22,7 +23,9 @@ export default class Set {
         val['props']  = props
         var returnVal = this.schema.filter(val)
         if (returnVal) {
-          res.push(val)
+          matched++
+          if(this.skip === false || matched > this.schema.skip)
+            res.push(val)
         }
         delete val['props']
       }

@@ -9,10 +9,18 @@ export var type = function (type, name = false) {
    }
 }
 
+export var skip = function(val) {
+   return function decorator(target, name, descriptor) {
+      target.skip = val
+      return descriptor
+   }
+}
+
 export default class Schema {
   constructor() {
     this.name = this.constructor.name.toLowerCase()
     this.set  = Set
+    this.skip = this.skip || false
     this.setBaseSet()
   }
 
