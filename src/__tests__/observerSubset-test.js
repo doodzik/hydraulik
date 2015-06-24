@@ -16,12 +16,45 @@ describe('ObserverSubset', function() {
       register: jest.genMockFn()
     }
     set = new Set()
-    set.actionType = 'actionType'
+    set.actionTypeCreate = 'actionTypeCreate'
     observerSet = new ObserverSubset(set, dispatcher)
     observerSet.create('argObj')
     expect(observerSet.dispatcher.dispatch).toBeCalledWith({
-      actionType: 'actionType',
+      actionType: 'actionTypeCreate',
       argObj: 'argObj'
+    })
+  })
+
+  it('#update', function() {
+    var dispatcher, observerSet, set
+    dispatcher = {
+      dispatch: jest.genMockFn(),
+      register: jest.genMockFn()
+    }
+    set = new Set()
+    set.actionTypeUpdate = 'actionTypeUpdate'
+    observerSet = new ObserverSubset(set, dispatcher)
+    observerSet.update('query', 'argObj')
+    expect(observerSet.dispatcher.dispatch).toBeCalledWith({
+      actionType: 'actionTypeUpdate',
+      query: 'query',
+      argObj: 'argObj'
+    })
+  })
+
+  it('#destroy', function() {
+    var dispatcher, observerSet, set
+    dispatcher = {
+      dispatch: jest.genMockFn(),
+      register: jest.genMockFn()
+    }
+    set = new Set()
+    set.actionTypeDestroy = 'actionTypeDestroy'
+    observerSet = new ObserverSubset(set, dispatcher)
+    observerSet.destroy('query', 'argObj')
+    expect(observerSet.dispatcher.dispatch).toBeCalledWith({
+      actionType: 'actionTypeDestroy',
+      query: 'query'
     })
   })
 

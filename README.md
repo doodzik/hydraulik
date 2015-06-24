@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/doodzik/hydraulik.svg?branch=master)](https://travis-ci.org/doodzik/hydraulik)
 
-Hydraulik is an experimental framework for writing state handling React components.
+Hydraulik is an experimental library for writing state handling React components.
 It is based on react and the flux architecture. And of such you should be familiar with both of them to use hydraulik properly.
 
 #Contributing
@@ -60,7 +60,7 @@ Requirements: [nvm] (https://github.com/creationix/nvm)
 ```bash
 $ mkdir projectName
 $ cd $_ && npm init && npm install hydraulik-cli --save-dev
-# add "hydraulik": "./node_modules/.bin/hydraulik" to your package.json file in the script section
+# add "hydraulik": "./node_modules/.bin/hydraulik-cli" to your package.json file in the script section
 $ npm run hydraulik -- init
 $ npm install
 ```
@@ -70,9 +70,9 @@ $ npm install
 There is a separate documentation for the [cli] (https://github.com/doodzik/hydraulik-cli) and [types] (https://github.com/doodzik/hydraulik-types) available.
 
 ```jsx
-import React, { Component }     from 'react'
-import { Schema, type, skip, Klass }  from 'hydraulik'
-import { Str }                  from 'hydraulik-types'
+import React, { Component }          from 'react'
+import { Schema, type, skip, Klass } from 'hydraulik'
+import { Str }                       from 'hydraulik-types'
 
 @type(Str, name = 'name')
 class Users extend Schema {
@@ -96,7 +96,8 @@ user          = klass.sets.user
 users.create({ name: 'testName'})
 users.create({ name: 'Second' })
 
-// these components automatically listen for changed data and rerender automatically
+// these components automatically listen for changed data
+// and rerender automatically
 var UserList = users.Component(class {
   render(){
     var lis = this.params.users.map(user => <li>user.name</li>)
@@ -158,7 +159,7 @@ if skip is 0 nothing is skiped
 @limit(int) limits as many as are defined for int
 
 if limit is 0 nothing is limited
-if limit is 1 it returns the element without the surrounding array 
+if limit is 1 it returns the element without the surrounding array
 
 ###`#filter(filterFn: function(val))`
 
@@ -169,6 +170,10 @@ filters the set. FilterFn has to return a boolean. Val is an element of the set.
 instances of the ObserverSet/ObserverSubset are stored in the Klass instance variable sets.
 
 ###`create(argObj: Object)`
+
+###`update(query: Object, argObj: Object)`
+
+###`destroy(query: Object)`
 
 ###`Component(ComposedComponent: Component)`
 

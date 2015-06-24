@@ -2,14 +2,16 @@ import { StrError } from 'hydraulik-types'
 
 export default class Set {
   constructor(schema) {
-    schema          = new schema()
-    this.schema     = schema
-    this.set        = []
-    this.baseSet    = schema.baseSet
-    this.default    = []
-    this.error      = {}
-    this.name       = schema.name
-    this.actionType = this.name + '_CREATE'
+    schema                 = new schema()
+    this.schema            = schema
+    this.set               = []
+    this.baseSet           = schema.baseSet
+    this.default           = []
+    this.error             = {}
+    this.name              = schema.name
+    this.actionTypeCreate  = this.name + '_CREATE'
+    this.actionTypeUpdate  = this.name + '_UPDATE'
+    this.actionTypeDestroy = this.name + '_DESTROY'
   }
 
   read(props){
@@ -43,6 +45,47 @@ export default class Set {
 
   create(arg){
     this.set.push(arg)
+  }
+
+  update(query, args){
+    this.set.forEach((set) => {
+      for (var q in query) {
+        if (query.hasOwnProperty(q)) {
+          if(query[q] !== set[q])
+            return false
+        }
+      }
+      for (var a in args) {
+        if (args.hasOwnProperty(a))
+          set[a] = args[a]
+      }
+    })
+  }
+
+  destroy(query){
+    var len    = this.set.length >>> 0,
+        i      = 0,
+        toSkip = false,
+        set
+
+    while (i < len) {
+      toSkip = false
+      set = this.set[i]
+      for (var q in query) {
+        if (query.hasOwnProperty(q)) {
+          if(query[q] != set[q]) {
+            toSkip = true
+            break
+          }
+        }
+      }
+      if(toSkip) {
+        i++
+      } else {
+        this.set.splice(i, 1)
+        len--
+      }
+    }
   }
 
   // return true if no error else falso

@@ -16,15 +16,36 @@ describe('ObserverSet', function() {
 
   describe("#register", function() {
     var observerSet, calls
-    var dispatcher = { register: jest.genMockFn() },
-        action     = { actionType: 'hello', argObj: '' },
-        set        = new Set()
-    set.actionType = 'hello'
-    it('calls set.create when actionType matches', function() {
+    var dispatcher    = { register: jest.genMockFn() },
+        actionCreate  = { actionType: 'Create', argObj: '' },
+        actionUpdate  = { actionType: 'Update', argObj: '', query: ''},
+        actionDestroy = { actionType: 'Destroy', query: '' },
+        set           = new Set()
+    set.actionTypeCreate  = 'Create'
+    set.actionTypeUpdate  = 'Update'
+    set.actionTypeDestroy = 'Destroy'
+
+    it('#create calls set.create when actionType matches', function() {
       set.validate.mockReturnValue(true)
       observerSet = new ObserverSet(set, dispatcher)
-      observerSet.register(action)
-      expect(observerSet.set.create).not.toBeCalledWith(action.argObj)
+      observerSet.register(actionCreate)
+      expect(observerSet.set.create).not.toBeCalledWith(actionCreate.argObj)
+      expect(observerSet.events.emitError).toBeCalled()
+    })
+
+    it('#update calls set.update when actionType matches', function() {
+      set.validate.mockReturnValue(true)
+      observerSet = new ObserverSet(set, dispatcher)
+      observerSet.register(actionUpdate)
+      expect(observerSet.set.create).not.toBeCalledWith(actionUpdate.query, actionUpdate.argObj)
+      expect(observerSet.events.emitError).toBeCalled()
+    })
+
+    it('#destroy calls set.destroy when actionType matches', function() {
+      set.validate.mockReturnValue(true)
+      observerSet = new ObserverSet(set, dispatcher)
+      observerSet.register(actionDestroy)
+      expect(observerSet.set.create).not.toBeCalledWith(actionDestroy.query)
       expect(observerSet.events.emitError).toBeCalled()
     })
 
@@ -32,8 +53,8 @@ describe('ObserverSet', function() {
       set.validate.mockReturnValue(false)
       observerSet = new ObserverSet(set, dispatcher)
       calls = setEvents.emitError.mock.calls
-      observerSet.register(action)
-      expect(observerSet.set.create).toBeCalledWith(action.argObj)
+      observerSet.register(actionCreate)
+      expect(observerSet.set.create).toBeCalledWith(actionCreate.argObj)
       expect(observerSet.events.emitError.mock.calls).toEqual(calls)
     })
   })

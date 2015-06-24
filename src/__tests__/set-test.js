@@ -103,6 +103,27 @@ describe('Set', function() {
     expect(set.set).toEqual([{name: 'hello'}])
   })
 
+  it('#update returns the set', function() {
+    class User extends Schema {}
+    var set = new Set(User)
+    set.create({name: 'hello'})
+    set.create({name: 'bye'})
+    set.update({name: 'bye'}, {name: 'world'})
+    expect(set.set).toEqual([{name: 'hello'}, {name: 'world'}])
+  })
+
+  it('#destroy returns the set', function() {
+    class User extends Schema {}
+    var set = new Set(User)
+    set.create({name: 'bye'})
+    set.create({name: 'hello'})
+    set.create({name: 'bye'})
+    set.create({name: 'world'})
+    set.create({name: 'bye'})
+    set.destroy({name: 'bye'})
+    expect(set.set).toEqual([{name: 'hello'}, {name: 'world'}])
+  })
+
   describe("#validate", function() {
     @type(Str)
     class User extends Schema {}

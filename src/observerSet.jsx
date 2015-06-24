@@ -7,13 +7,23 @@ export default class ObserverSet extends ObserverSubset {
   }
 
   register(action){
-    if(this.baseSet.actionType == action.actionType){
+    if(this.baseSet.actionTypeCreate == action.actionType){
       if (!this.baseSet.validate(action.argObj)) {
         this.baseSet.create(action.argObj)
         this.events.emitChange()
       } else {
         this.events.emitError()
       }
+    } else if(this.baseSet.actionTypeUpdate == action.actionType){
+      if (!this.baseSet.validate(action.argObj)) {
+        this.baseSet.update(action.query, action.argObj)
+        this.events.emitChange()
+      } else {
+        this.events.emitError()
+      }
+    } else if(this.baseSet.actionTypeDestroy == action.actionType){
+      this.baseSet.destroy(action.query)
+      this.events.emitChange()
     }
   }
 }

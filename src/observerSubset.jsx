@@ -11,8 +11,18 @@ export default class ObserverSubset {
   }
 
   create(argObj){
-    var actionType = this.baseSet.actionType
+    var actionType = this.baseSet.actionTypeCreate
     this.dispatcher.dispatch({ actionType, argObj })
+  }
+
+  update(query, argObj){
+    var actionType = this.baseSet.actionTypeUpdate
+    this.dispatcher.dispatch({ actionType, argObj, query })
+  }
+
+  destroy(query){
+    var actionType = this.baseSet.actionTypeDestroy
+    this.dispatcher.dispatch({ actionType, query })
   }
 
   getStateObj(props){
