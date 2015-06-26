@@ -4,10 +4,14 @@ var React         = require('react/addons'),
     Schema        = require('../hydraulik').Schema,
     type          = require('../hydraulik').type,
     Klass         = require('../hydraulik').Klass,
-    Str           = require('hydraulik-types').Str,
+    Str           = require('hydraulik-types').Str.default,
+    min           = require('hydraulik-types').Str.min,
     TestUtils     = React.addons.TestUtils
 
-@type(Str, name = 'name')
+@min(1)
+class CustomStr extends Str {}
+
+@type(CustomStr, name = 'name')
 class User extends Schema {
   filter(user) {
     return 'Second' == user.name || 'Third' == user.name
@@ -72,7 +76,7 @@ describe('Component ObserverSet/Subset', function() {
 
     users.create({ name: '' })
 
-    expect(testComp.state).toEqual({ user_error: { name: 'Str is too short' } })
+    expect(testComp.state).toEqual({ user_error: { name: 'name is too short' } })
 
     // TODO test if test component receives values
   })

@@ -4,7 +4,7 @@ var Schema = require('../schema').default,
     type   = require('../schema').type,
     skip   = require('../schema').skip,
     limit  = require('../schema').limit,
-    Str    = require('hydraulik-types').Str
+    Str    = require('hydraulik-types').Str.default
 
 
 describe('Schema', function() {

@@ -1,4 +1,4 @@
-import { StrError } from 'hydraulik-types'
+import { Error } from 'hydraulik-types'
 
 export default class Set {
   constructor(schema) {
@@ -92,9 +92,10 @@ export default class Set {
   validate(arg: Object): Boolean {
     var isValid = true
     this.error = this.schema.types.reduce((typeErrors, type) => {
-        var typeInstance = new type.type(arg[type.name])
+        var name         = type.name,
+            typeInstance = new type.type(arg[type.name], {name})
         typeErrors[type.name] = typeInstance.validate()
-        isValid = new StrError(typeInstance).isValid()
+        isValid = new Error(typeInstance).isValid()
         return typeErrors
     }, {})
     return isValid

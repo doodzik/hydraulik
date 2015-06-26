@@ -1,11 +1,13 @@
 jest.autoMockOff()
 
-var Schema = require('../schema').default,
-    type   = require('../schema').type,
-    skip   = require('../schema').skip,
-    limit  = require('../schema').limit,
-    Set    = require('../set'),
-    Str    = require('hydraulik-types').Str
+var Schema    = require('../schema').default,
+    type      = require('../schema').type,
+    skip      = require('../schema').skip,
+    limit     = require('../schema').limit,
+    Set       = require('../set'),
+    StrImport = require('hydraulik-types').Str,
+    min       = StrImport.min,
+    Str       = StrImport.default
 
 describe('Set', function() {
   it('#new sets the schema and init set', function() {
@@ -125,7 +127,9 @@ describe('Set', function() {
   })
 
   describe("#validate", function() {
-    @type(Str)
+    @min(1)
+    class CustomStr extends Str {}
+    @type(CustomStr, name = 'str')
     class User extends Schema {}
     var set    = new Set(User)
     it('fullfills', function() {

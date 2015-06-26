@@ -6,7 +6,7 @@ module.exports = {
     if (path.indexOf('node_modules/') >= 0) {
       return src
     } else {
-      return babel.transform(src, { optional: ["es7.decorators"]}).code
+      return babel.transform(src, { optional: ["es7.decorators", "es7.exportExtensions"]}).code
     }
   }
 }

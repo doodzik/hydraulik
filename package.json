@@ -13,14 +13,14 @@
     "url": "git+https://github.com/doodzik/hydraulik.git"
   },
   "author": "Frederik Dudzik",
-  "license": "GNU",
+  "license": "GPL-3.0+",
   "bugs": {
     "url": "https://github.com/doodzik/hydraulik/issues"
   },
   "homepage": "https://github.com/doodzik/hydraulik#readme",
   "dependencies": {
     "flux": "^2.0.3",
-    "hydraulik-types": "0.0.1",
+    "hydraulik-types": "0.0.2",
     "object-assign": "^2.0.0",
     "react": "^0.13.3"
   },
