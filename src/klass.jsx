@@ -9,7 +9,7 @@ export default class Klass {
     this._sets      = {}
     this._build     = false
   }
-  
+
   push(Schema) {
     var schema = new Schema()
     this._sets[schema.name] = new schema.set(Schema)
