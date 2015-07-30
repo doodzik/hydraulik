@@ -79,7 +79,7 @@ class Users extend Schema {
 }
 
 class User extend Users {
-    @limit()
+    @limit(1)
     @skip()
     filter(user) {
       return super.filter(user) && user.params.name == user.name
@@ -105,9 +105,9 @@ var UserList = users.Component(class {
   }
 }
 
-var UserShow = user.Component(class User {
+var UserShow = user.Component(class {
   render(){
-    return <div>{this.params.user[0].name}</div>
+    return <div>{this.params.user.name}</div>
   }
 })
 
