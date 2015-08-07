@@ -1,10 +1,24 @@
-import Set from './set'
+import Set    from './set'
+import assign from 'object-assign'
+import _      from 'lodash'
 
-export var type = function (type, name = false) {
+var findByName = function(element, index, array) {
+  if (element.name === name)
+    return true
+  return false
+}
+
+export var type = function (type, name = false, preset = null) {
    return function decorator(target) {
       target.types = target.types || []
       name         = name || type.name.toLowerCase()
-      target.types.push({ type, name })
+
+      let elmIndex = _.findIndex(target.types, { name })
+
+      if(elmIndex == -1)
+        target.types.push({ type, name, preset })
+      else
+        target.types[elmIndex] = assign(target.types[elmIndex], { type, name, preset })
       return target
    }
 }

@@ -21,6 +21,7 @@ describe('Schema', function() {
     expect(schema.types).toEqual([
       {
         type: Str,
+        preset: null,
         name: 'str'
       }
     ])
@@ -33,6 +34,7 @@ describe('Schema', function() {
     expect(schema.types).toEqual([
       {
         type: Str,
+        preset: null,
         name: 'text'
       }
     ])
@@ -46,10 +48,27 @@ describe('Schema', function() {
     expect(schema.types).toEqual([
       {
         type: Str,
+        preset: null,
         name: 'text'
       }, {
         type: Str,
+        preset: null,
         name: 'str'
+      }
+    ])
+  })
+
+  it('@type same type is overwritten with new infos', function() {
+    @type(Str, name = 'text')
+    class Users extends Schema {}
+    @type(Str, name = 'text', preset = 'hallo world')
+    class Users2 extends Schema {}
+    var schema = new Users2()
+    expect(schema.types).toEqual([
+      {
+        type: Str,
+        preset: 'hallo world',
+        name: 'text'
       }
     ])
   })

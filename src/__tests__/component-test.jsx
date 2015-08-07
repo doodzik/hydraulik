@@ -1,11 +1,12 @@
 jest.autoMockOff()
 
 var React         = require('react/addons'),
-    Schema        = require('../hydraulik').Schema,
-    type          = require('../hydraulik').type,
-    Klass         = require('../hydraulik').Klass,
     Str           = require('hydraulik-types').Str.default,
     min           = require('hydraulik-types').Str.min,
+    h             = require('../hydraulik'),
+    Schema        = require('../hydraulik').default,
+    type          = require('../hydraulik').type,
+    Klass         = require('../hydraulik').Klass,
     TestUtils     = React.addons.TestUtils
 
 @min(1)
