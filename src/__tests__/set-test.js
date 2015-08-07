@@ -5,9 +5,8 @@ var Schema    = require('../schema').default,
     skip      = require('../schema').skip,
     limit     = require('../schema').limit,
     Set       = require('../set'),
-    StrImport = require('hydraulik-types').Str,
-    min       = StrImport.min,
-    Str       = StrImport.default
+    min       = require('hydraulik-types/lib/str').min,
+    Str       = require('hydraulik-types/lib/str').default
 
 describe('Set', function() {
   it('#new sets the schema and init set', function() {

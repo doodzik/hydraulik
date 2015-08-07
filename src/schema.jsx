@@ -2,12 +2,6 @@ import Set    from './set'
 import assign from 'object-assign'
 import _      from 'lodash'
 
-var findByName = function(element, index, array) {
-  if (element.name === name)
-    return true
-  return false
-}
-
 export var type = function (type, name = false, preset = null) {
    return function decorator(target) {
       target.types = target.types || []

@@ -20,9 +20,9 @@
   "homepage": "https://github.com/doodzik/hydraulik#readme",
   "dependencies": {
     "flux": "^2.0.3",
-    "hydraulik-types": "0.0.2",
+    "hydraulik-types": "~0.0.3",
     "lodash": "^3.10.1",
-    "object-assign": "^2.0.0",
+    "object-assign": "^3.0.0",
     "react": "^0.13.3"
   },
   "devDependencies": {
@@ -34,9 +34,7 @@
     "gulp-exec": "^2.1.1",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^3.0.4",
-    "jest-cli": "^0.4.13",
-    "jshint": "^2.7.0",
-    "react": "^0.13.3"
+    "jest-cli": "^0.4.18"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",

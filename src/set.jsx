@@ -1,4 +1,4 @@
-import { Error } from 'hydraulik-types'
+import Error from 'hydraulik-types/lib/error'
 
 export default class Set {
   constructor(schema) {

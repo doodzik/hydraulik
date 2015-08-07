@@ -14,7 +14,7 @@ gulp.task('build_lib', ['clean_lib'], function() {
   return gulp
     .src(['src/**/*.jsx', 'src/**/*.js', '!src/**/__tests__/*'])
     .pipe(sourcemaps.init())
-    .pipe(babel())
+    .pipe(babel({ optional: ["es7.decorators", "es7.exportExtensions"]}))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('lib'))
 })
@@ -22,7 +22,7 @@ gulp.task('build_lib', ['clean_lib'], function() {
 gulp.task('build_bin', ['clean_bin'], function() {
   return gulp
     .src('bin/templatesSrc/**/*.js')
-    .pipe(babel())
+    .pipe(babel({ optional: ["es7.decorators", "es7.exportExtensions"]}))
     .pipe(gulp.dest('bin/templates'))
 })
 

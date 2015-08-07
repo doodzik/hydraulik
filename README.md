@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/doodzik/hydraulik.svg?branch=master)](https://travis-ci.org/doodzik/hydraulik)
 [![Dependencies Status](https://david-dm.org/doodzik/hydraulik.svg)](https://david-dm.org/doodzik/hydraulik)
-
+[![DevDependencies Status](https://david-dm.org/doodzik/hydraulik/dev-status.svg)](https://david-dm.org/doodzik/hydraulik#info=devDependencies)
 
 Hydraulik is an experimental library for writing state handling React components.
 It is based on react and the flux architecture. And of such you should be familiar with both of them to use hydraulik properly.
