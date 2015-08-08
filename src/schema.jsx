@@ -4,7 +4,7 @@ export *      from './schema-decorator'
 export default class Schema {
   constructor() {
     this.name  = this.constructor.name.toLowerCase()
-    this.set   = Set
+    this.set   = this.set   || Set
     this.skip  = this.skip  || 0
     this.limit = this.limit || 0
     this.setBaseSet()

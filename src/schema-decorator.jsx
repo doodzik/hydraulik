@@ -15,6 +15,13 @@ export var type = function (type, name = false, preset = null) {
    }
 }
 
+export var set = function (set) {
+   return function decorator(target) {
+      target.prototype.set = set
+      return target
+   }
+}
+
 export var skip = function(val) {
    return function decorator(target, name, descriptor) {
       target.skip = (typeof val === 'undefined') ? true : val

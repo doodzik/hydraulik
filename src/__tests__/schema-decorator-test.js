@@ -1,8 +1,10 @@
 jest.dontMock('../schema-decorator')
 
-var type = require('../schema-decorator').type,
-    skip   = require('../schema-decorator').skip,
-    limit  = require('../schema-decorator').limit,
+var deco   = require('../schema-decorator'),
+    type   = deco.type,
+    skip   = deco.skip,
+    limit  = deco.limit,
+    set    = deco.set,
     Str    = require('hydraulik-types/lib/str').default
 
 describe('schema decorators', function() {
@@ -74,6 +76,14 @@ describe('schema decorators', function() {
 
     var users = new Users()
     expect(users.limit).toEqual(3)
+  })
+
+  it('@set', function() {
+    @set('foo')
+    class Users {}
+
+    var users = new Users()
+    expect(users.set).toEqual('foo')
   })
 
   it('@skip', function() {
