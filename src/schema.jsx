@@ -1,4 +1,4 @@
-import Set    from './set'
+import Set    from './array-set'
 export *      from './schema-decorator'
 
 export default class Schema {

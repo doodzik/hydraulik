@@ -4,7 +4,7 @@ var Schema    = require('../schema').default,
     type      = require('../schema').type,
     skip      = require('../schema').skip,
     limit     = require('../schema').limit,
-    Set       = require('../set'),
+    Set       = require('../array-set'),
     min       = require('hydraulik-types/lib/str').min,
     Str       = require('hydraulik-types/lib/str').default
 

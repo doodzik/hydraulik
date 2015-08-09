@@ -1,7 +1,7 @@
 jest.dontMock('../observerSubset')
 
 var ObserverSubset   = require('../observerSubset'),
-    Set              = require('../set'),
+    Set              = require('../array-set'),
     setEvents        = require('../setEvents'),
     assign           = require('object-assign'),
     React            = require('react/addons'),

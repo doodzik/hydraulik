@@ -1,9 +1,9 @@
 jest.dontMock('../schema')
 jest.dontMock('../klass')
-jest.dontMock('../set')
+jest.dontMock('../array-set')
 
 var Schema = require('../schema').default,
-    Set    = require('../set'),
+    Set    = require('../array-set'),
     Klass  = require('../klass')
 
 describe('Klass', function() {
