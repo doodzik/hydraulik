@@ -23,7 +23,7 @@ describe('Object Set', function() {
     class User extends Schema {}
     var set = new Set(User)
     set.create({name: 'hello', post: 'hello'})
-    set.update({}, {name: 'world'})
+    set.update({name: 'world'})
     expect(set.set).toEqual({name: 'world', post: 'hello'})
   })
 

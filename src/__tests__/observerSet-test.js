@@ -37,7 +37,7 @@ describe('ObserverSet', function() {
       set.validate.mockReturnValue(true)
       observerSet = new ObserverSet(set, dispatcher)
       observerSet.register(actionUpdate)
-      expect(observerSet.set.create).not.toBeCalledWith(actionUpdate.query, actionUpdate.argObj)
+      expect(observerSet.set.create).not.toBeCalledWith(actionUpdate.argObj, actionUpdate.query)
       expect(observerSet.events.emitError).toBeCalled()
     })
 

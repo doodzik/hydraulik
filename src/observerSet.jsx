@@ -16,7 +16,7 @@ export default class ObserverSet extends ObserverSubset {
       }
     } else if(this.baseSet.actionTypeUpdate == action.actionType){
       if (!this.baseSet.validate(action.argObj)) {
-        this.baseSet.update(action.query, action.argObj)
+        this.baseSet.update(action.argObj, action.query)
         this.events.emitChange()
       } else {
         this.events.emitError()

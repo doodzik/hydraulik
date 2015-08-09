@@ -100,7 +100,7 @@ describe('Array Set', function() {
     var set = new Set(User)
     set.create({name: 'hello'})
     set.create({name: 'bye'})
-    set.update({name: 'bye'}, {name: 'world'})
+    set.update({name: 'world'}, {name: 'bye'})
     expect(set.set).toEqual([{name: 'hello'}, {name: 'world'}])
   })
 

@@ -39,7 +39,7 @@ export default class Set extends BasicSet {
     this.set.push(arg)
   }
 
-  update(query, args){
+  update(args, query){
     this.set.forEach((set) => {
       for (var q in query) {
         if (query.hasOwnProperty(q)) {

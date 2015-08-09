@@ -17,7 +17,7 @@ export default class Set extends BasicSet{
     }
   }
 
-  update(query, args){
+  update(args, query){
     this.create(args)
   }
 
