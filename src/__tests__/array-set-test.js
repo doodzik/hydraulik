@@ -1,20 +1,11 @@
 jest.autoMockOff()
 
 var Schema    = require('../schema').default,
-    type      = require('../schema').type,
     skip      = require('../schema').skip,
     limit     = require('../schema').limit,
-    Set       = require('../array-set'),
-    min       = require('hydraulik-types/lib/str').min,
-    Str       = require('hydraulik-types/lib/str').default
+    Set       = require('../array-set')
 
-describe('Set', function() {
-  it('#new sets the schema and init set', function() {
-    class User extends Schema {}
-    set    = new Set(User)
-    expect(set.schema).toEqual(new User())
-  })
-
+describe('Array Set', function() {
   describe('#read', function () {
     it('returns the set', function() {
       class User extends Schema {}
@@ -30,7 +21,7 @@ describe('Set', function() {
           return user.props == 'name'
         }
       }
-      set    = new Set(User)
+      set        = new Set(User)
       set.set    = [{name: 'hello'}]
       expect(set.read('name')).toEqual([{name: 'hello'}])
     })
@@ -123,20 +114,5 @@ describe('Set', function() {
     set.create({name: 'bye'})
     set.destroy({name: 'bye'})
     expect(set.set).toEqual([{name: 'hello'}, {name: 'world'}])
-  })
-
-  describe("#validate", function() {
-    @min(1)
-    class CustomStr extends Str {}
-    @type(CustomStr, name = 'str')
-    class User extends Schema {}
-    var set    = new Set(User)
-    it('fullfills', function() {
-      expect(set.validate({str: 'long enought'})).toEqual(false)
-    })
-
-   it('rejects', function() {
-      expect(set.validate({str: ''})).toEqual(true)
-    })
   })
 })

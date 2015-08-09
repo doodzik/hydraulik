@@ -1,6 +1,7 @@
 jest.dontMock('../schema')
 jest.dontMock('../klass')
 jest.dontMock('../array-set')
+jest.dontMock('../basic-set')
 
 var Schema = require('../schema').default,
     Set    = require('../array-set'),

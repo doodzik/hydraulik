@@ -1,17 +1,9 @@
-import Error from 'hydraulik-types/lib/error'
+import BasicSet from './basic-set.jsx'
 
-export default class Set {
+export default class Set extends BasicSet {
   constructor(schema) {
-    schema                 = new schema()
-    this.schema            = schema
+    super(schema)
     this.set               = []
-    this.baseSet           = schema.baseSet
-    this.default           = []
-    this.error             = {}
-    this.name              = schema.name
-    this.actionTypeCreate  = this.name + '_CREATE'
-    this.actionTypeUpdate  = this.name + '_UPDATE'
-    this.actionTypeDestroy = this.name + '_DESTROY'
   }
 
   read(props){
@@ -86,18 +78,5 @@ export default class Set {
         len--
       }
     }
-  }
-
-  // return true if no error else falso
-  validate(arg: Object): Boolean {
-    var isValid = true
-    this.error = this.schema.types.reduce((typeErrors, type) => {
-        var name         = type.name,
-            typeInstance = new type.type(arg[type.name], {name})
-        typeErrors[type.name] = typeInstance.validate()
-        isValid = new Error(typeInstance).isValid()
-        return typeErrors
-    }, {})
-    return isValid
   }
 }
