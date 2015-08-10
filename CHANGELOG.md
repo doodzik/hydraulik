@@ -1,3 +1,11 @@
+## Version 0.1.0 2015-08-10
+add preset(default) to the @type decorator
+add @type overwrites preset if of same name
+add @set decorator/set injector
+add object-set
+change set to array-set
+change params position on update operation. now: (arg, query)
+
 ## Version 0.0.5 2015-06-24
 
 remove hydraulik-cli as dependency
