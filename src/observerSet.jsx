@@ -7,23 +7,39 @@ export default class ObserverSet extends ObserverSubset {
   }
 
   register(action){
-    if(this.baseSet.actionTypeCreate == action.actionType){
-      if (!this.baseSet.validate(action.argObj)) {
-        this.baseSet.create(action.argObj)
-        this.events.emitChange()
-      } else {
-        this.events.emitError()
-      }
-    } else if(this.baseSet.actionTypeUpdate == action.actionType){
-      if (!this.baseSet.validate(action.argObj)) {
-        this.baseSet.update(action.argObj, action.query)
-        this.events.emitChange()
-      } else {
-        this.events.emitError()
-      }
-    } else if(this.baseSet.actionTypeDestroy == action.actionType){
-      this.baseSet.destroy(action.query)
+    let actionType = action.actionType
+    if(this.baseSet.actionTypeCreate == actionType)
+      this.triggerCreate(action.argObj)
+    else if(this.baseSet.actionTypeUpdate == actionType)
+      this.triggerUpdate(action.argObj, action.query)
+    else if(this.baseSet.actionTypeDestroy == actionType)
+      this.triggerDestroy(action.query)
+  }
+
+  triggerCreate(argObj){
+    let presetArg = this.set.preset(argObj)
+    if (!this.baseSet.validate(presetArg)) {
+      this.baseSet.create(presetArg)
       this.events.emitChange()
+    } else {
+      this.events.emitError()
     }
+  }
+
+  triggerUpdate(argObj, query){
+    let presetArg   = this.set.preset(argObj)
+    let presetQuery = this.set.preset(query)
+    if (!this.baseSet.validate(presetArg)) {
+      this.baseSet.update(presetArg, presetQuery)
+      this.events.emitChange()
+    } else {
+      this.events.emitError()
+    }
+  }
+
+  triggerDestroy(query){
+    let presetQuery = this.set.preset(query)
+    this.baseSet.destroy(presetQuery)
+    this.events.emitChange()
   }
 }

@@ -17,45 +17,98 @@ describe('ObserverSet', function() {
   describe("#register", function() {
     var observerSet, calls
     var dispatcher    = { register: jest.genMockFn() },
-        actionCreate  = { actionType: 'Create', argObj: '' },
-        actionUpdate  = { actionType: 'Update', argObj: '', query: ''},
+        actionCreate  = { actionType: 'Create',  argObj: '' },
+        actionUpdate  = { actionType: 'Update',  argObj: '', query: ''},
         actionDestroy = { actionType: 'Destroy', query: '' },
         set           = new Set()
     set.actionTypeCreate  = 'Create'
     set.actionTypeUpdate  = 'Update'
     set.actionTypeDestroy = 'Destroy'
 
-    it('#create calls set.create when actionType matches', function() {
-      set.validate.mockReturnValue(true)
-      observerSet = new ObserverSet(set, dispatcher)
+    it('trigger triggerCreate if actionType == create', function() {
+      var observerSet            = new ObserverSet(set, dispatcher)
+      observerSet.triggerCreate  = jest.genMockFn()
+      observerSet.triggerUpdate  = jest.genMockFn()
+      observerSet.triggerDestroy = jest.genMockFn()
       observerSet.register(actionCreate)
-      expect(observerSet.set.create).not.toBeCalledWith(actionCreate.argObj)
-      expect(observerSet.events.emitError).toBeCalled()
+      expect(observerSet.triggerCreate).toBeCalledWith(actionCreate.argObj)
+      expect(observerSet.triggerDestroy).not.toBeCalled()
+      expect(observerSet.triggerUpdate).not.toBeCalled()
     })
 
-    it('#update calls set.update when actionType matches', function() {
-      set.validate.mockReturnValue(true)
-      observerSet = new ObserverSet(set, dispatcher)
+    it('trigger triggerUpdate if actionType == update', function() {
+      var observerSet            = new ObserverSet(set, dispatcher)
+      observerSet.triggerCreate  = jest.genMockFn()
+      observerSet.triggerUpdate  = jest.genMockFn()
+      observerSet.triggerDestroy = jest.genMockFn()
       observerSet.register(actionUpdate)
-      expect(observerSet.set.create).not.toBeCalledWith(actionUpdate.argObj, actionUpdate.query)
-      expect(observerSet.events.emitError).toBeCalled()
+      expect(observerSet.triggerUpdate).toBeCalledWith(actionUpdate.argObj, actionUpdate.query)
+      expect(observerSet.triggerDestroy).not.toBeCalled()
+      expect(observerSet.triggerCreate).not.toBeCalled()
     })
 
-    it('#destroy calls set.destroy when actionType matches', function() {
-      set.validate.mockReturnValue(true)
-      observerSet = new ObserverSet(set, dispatcher)
+    it('trigger triggerDestroy if actionType == destroy', function() {
+      var observerSet            = new ObserverSet(set, dispatcher)
+      observerSet.triggerCreate  = jest.genMockFn()
+      observerSet.triggerUpdate  = jest.genMockFn()
+      observerSet.triggerDestroy = jest.genMockFn()
       observerSet.register(actionDestroy)
-      expect(observerSet.set.create).not.toBeCalledWith(actionDestroy.query)
-      expect(observerSet.events.emitError).toBeCalled()
+      expect(observerSet.triggerDestroy).toBeCalledWith(actionDestroy.query)
+      expect(observerSet.triggerUpdate).not.toBeCalled()
+      expect(observerSet.triggerCreate).not.toBeCalled()
+    })
+  })
+
+  describe("#triggerCreate", function() {
+    it('creates value if valid', function() {
+      var set         = new Set(),
+          observerSet = new ObserverSet(set, { register: jest.genMockFn() })
+      observerSet.set.validate.mockReturnValue(false)
+      observerSet.set.preset.mockReturnValue('bar')
+      observerSet.triggerCreate('foo')
+      expect(observerSet.set.preset).toBeCalledWith('foo')
+      expect(observerSet.set.validate).toBeCalledWith('bar')
+      expect(observerSet.baseSet.create).toBeCalledWith('bar')
+      expect(observerSet.events.emitChange).toBeCalled()
     })
 
-    it('dosnt call set.create when actionType dosnt match', function() {
-      set.validate.mockReturnValue(false)
-      observerSet = new ObserverSet(set, dispatcher)
-      calls = setEvents.emitError.mock.calls
-      observerSet.register(actionCreate)
-      expect(observerSet.set.create).toBeCalledWith(actionCreate.argObj)
-      expect(observerSet.events.emitError.mock.calls).toEqual(calls)
+    it('emits error if invalid', function() {
+      var set = new Set()
+      set.validate.mockReturnValue(true)
+      set.preset.mockReturnValue('bar')
+      var observerSet = new ObserverSet(set, { register: jest.genMockFn() })
+      observerSet.triggerCreate('foo')
+      expect(observerSet.events.emitError).toBeCalled()
     })
+  })
+
+  describe("#triggerUpdate", function() {
+    it('updates', function() {
+      var set = new Set()
+      set.validate.mockReturnValue(false)
+      set.preset.mockReturnValueOnce('bar')
+      set.preset.mockReturnValueOnce('baz')
+      var observerSet = new ObserverSet(set, { register: jest.genMockFn() })
+      observerSet.triggerUpdate('foo', 'foo2')
+      expect(observerSet.baseSet.update).toBeCalledWith('bar', 'baz')
+      expect(observerSet.events.emitChange).toBeCalled()
+    })
+
+    it('emits error if invalid', function() {
+      var set = new Set()
+      set.validate.mockReturnValue(true)
+      var observerSet = new ObserverSet(set, { register: jest.genMockFn() })
+      observerSet.triggerUpdate('foo', 'foo2')
+      expect(observerSet.events.emitError).toBeCalled()
+    })
+  })
+
+  it("#triggerDestroy", function() {
+      observerSet = new ObserverSet(new Set(), { register: jest.genMockFn() })
+      observerSet.set.preset.mockReturnValue('bar')
+      observerSet.triggerDestroy('foo')
+      expect(observerSet.set.preset).toBeCalledWith('foo')
+      expect(observerSet.baseSet.destroy).toBeCalledWith('bar')
+      expect(observerSet.events.emitChange).toBeCalled()
   })
 })

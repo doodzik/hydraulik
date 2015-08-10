@@ -34,5 +34,13 @@ describe('Basic Set', function() {
       expect(set.validate({str: ''})).toEqual(true)
     })
   })
+
+  it("#preset sets missing keys", function() {
+    @type(Str, name = 'str',  preset = 'bar')
+    @type(Str, name = 'str2', preset = 'bar')
+    class User extends Schema {}
+    var set    = new Set(User)
+    expect(set.preset({str: 'foo'})).toEqual({str: 'foo', str2: 'bar'})
+  })
 })
 
