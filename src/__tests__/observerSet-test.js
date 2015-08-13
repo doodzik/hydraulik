@@ -63,18 +63,18 @@ describe('ObserverSet', function() {
     it('creates value if valid', function() {
       var set         = new Set(),
           observerSet = new ObserverSet(set, { register: jest.genMockFn() })
-      observerSet.set.validate.mockReturnValue(false)
+      observerSet.set.validateCreate.mockReturnValue(false)
       observerSet.set.preset.mockReturnValue('bar')
       observerSet.triggerCreate('foo')
       expect(observerSet.set.preset).toBeCalledWith('foo')
-      expect(observerSet.set.validate).toBeCalledWith('bar')
+      expect(observerSet.set.validateCreate).toBeCalledWith('bar')
       expect(observerSet.baseSet.create).toBeCalledWith('bar')
       expect(observerSet.events.emitChange).toBeCalled()
     })
 
     it('emits error if invalid', function() {
       var set = new Set()
-      set.validate.mockReturnValue(true)
+      set.validateCreate.mockReturnValue(true)
       set.preset.mockReturnValue('bar')
       var observerSet = new ObserverSet(set, { register: jest.genMockFn() })
       observerSet.triggerCreate('foo')
@@ -85,7 +85,7 @@ describe('ObserverSet', function() {
   describe("#triggerUpdate", function() {
     it('updates', function() {
       var set = new Set()
-      set.validate.mockReturnValue(false)
+      set.validateUpdate.mockReturnValue(false)
       set.preset.mockReturnValueOnce('bar')
       set.preset.mockReturnValueOnce('baz')
       var observerSet = new ObserverSet(set, { register: jest.genMockFn() })
@@ -96,7 +96,7 @@ describe('ObserverSet', function() {
 
     it('emits error if invalid', function() {
       var set = new Set()
-      set.validate.mockReturnValue(true)
+      set.validateUpdate.mockReturnValue(true)
       var observerSet = new ObserverSet(set, { register: jest.genMockFn() })
       observerSet.triggerUpdate('foo', 'foo2')
       expect(observerSet.events.emitError).toBeCalled()

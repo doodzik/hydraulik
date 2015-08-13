@@ -12,7 +12,22 @@ export default class BasicSet {
     this.actionTypeDestroy = this.name + '_DESTROY'
   }
 
-  validate(arg: Object): Boolean {
+  validateUpdate(arg: Object): Boolean {
+    var isValid = true
+    this.error = this.schema.types.reduce((typeErrors, type) => {
+
+        var name         = type.name
+        if(arg[name] === undefined || arg[name] === null)
+          return typeErrors
+        var typeInstance = new type.type(arg[name], {name})
+        typeErrors[type.name] = typeInstance.validate()
+        isValid = new Error(typeInstance).isValid()
+        return typeErrors
+    }, {})
+    return isValid
+  }
+
+  validateCreate(arg: Object): Boolean {
     var isValid = true
     this.error = this.schema.types.reduce((typeErrors, type) => {
         var name         = type.name,
@@ -25,11 +40,13 @@ export default class BasicSet {
   }
 
   preset(arg: Object): Object {
-    return this.error = this.schema.types.reduce((argPreset, type) => {
+    return this.schema.types.reduce((argPreset, type) => {
         var name     = type.name,
+            preset   = type.preset,
             argValue = arg[name],
             value    = (argValue === undefined || argValue === null) ? preset : argValue
-        argPreset[name] = value
+        if (value !== undefined && value !== null)
+          argPreset[name] = value
         return argPreset
     }, {})
   }

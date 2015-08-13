@@ -18,7 +18,7 @@ export default class ObserverSet extends ObserverSubset {
 
   triggerCreate(argObj){
     let presetArg = this.set.preset(argObj)
-    if (!this.baseSet.validate(presetArg)) {
+    if (!this.baseSet.validateCreate(presetArg)) {
       this.baseSet.create(presetArg)
       this.events.emitChange()
     } else {
@@ -29,7 +29,7 @@ export default class ObserverSet extends ObserverSubset {
   triggerUpdate(argObj, query){
     let presetArg   = this.set.preset(argObj)
     let presetQuery = this.set.preset(query)
-    if (!this.baseSet.validate(presetArg)) {
+    if (!this.baseSet.validateUpdate(presetArg)) {
       this.baseSet.update(presetArg, presetQuery)
       this.events.emitChange()
     } else {

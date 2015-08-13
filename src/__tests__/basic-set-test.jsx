@@ -19,7 +19,24 @@ describe('Basic Set', function() {
     expect(set.name).toEqual('user')
   })
 
-  describe("#validate", function() {
+  describe("#validatePartial", function() {
+    @min(1)
+    class CustomStr extends Str {}
+    @type(CustomStr, name = 'str')
+    @type(CustomStr, name = 'foo')
+    class User extends Schema {}
+    var set    = new Set(User)
+
+    it('fullfills', function() {
+      expect(set.validateUpdate({str: 'long enought'})).toEqual(false)
+    })
+
+   it('rejects', function() {
+      expect(set.validateUpdate({str: ''})).toEqual(true)
+    })
+  })
+
+  describe("#validateCreate", function() {
     @min(1)
     class CustomStr extends Str {}
     @type(CustomStr, name = 'str')
@@ -27,11 +44,11 @@ describe('Basic Set', function() {
     var set    = new Set(User)
 
     it('fullfills', function() {
-      expect(set.validate({str: 'long enought'})).toEqual(false)
+      expect(set.validateCreate({str: 'long enought'})).toEqual(false)
     })
 
    it('rejects', function() {
-      expect(set.validate({str: ''})).toEqual(true)
+      expect(set.validateCreate({str: ''})).toEqual(true)
     })
   })
 

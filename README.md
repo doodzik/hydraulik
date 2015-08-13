@@ -147,6 +147,7 @@ The issue doesn't have to be code relatet. If you think that there can be someth
 ##Guide
 
 The source code lives in the src folder.
+The master branch is always the last released version. On the development branch is the working code.
 
 ###hydraulik.jsx
 exports all classes that can be accessible through `import * from 'hydraulik'`

@@ -1,6 +1,6 @@
-import BasicSet from './basic-set.jsx'
+import BasicSet from './basic-set'
 
-export default class Set extends BasicSet{
+export default class Set extends BasicSet {
   constructor(schema) {
     super(schema)
     this.set   = {}

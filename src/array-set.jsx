@@ -1,4 +1,4 @@
-import BasicSet from './basic-set.jsx'
+import BasicSet from './basic-set'
 
 export default class Set extends BasicSet {
   constructor(schema) {
@@ -7,7 +7,7 @@ export default class Set extends BasicSet {
   }
 
   read(props){
-    var res     = []
+    var res     = [],
         len     = this.set.length >>> 0,
         matched = 0,
         skip    = (this.schema.skip === true) ? (props.skip || 0) : this.schema.skip,
