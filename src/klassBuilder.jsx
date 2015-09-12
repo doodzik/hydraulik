@@ -1,13 +1,4 @@
-import ObserverSet    from './observerSet'
-import ObserverSubset from './observerSubset'
-
-export var filterSplit = function(array, fun) {
-  var resTrue  = [],
-      resFalse = [],
-      len      = array.length
-  array.forEach(val => (fun(val)) ? resTrue.push(val) : resFalse.push(val))
-  return [resTrue, resFalse]
-}
+import { split } from './array'
 
 export var isBaseSet = function (sets) {
   return function(set) {
@@ -15,23 +6,12 @@ export var isBaseSet = function (sets) {
   }
 }
 
-export var setStoreOfSubset = function (sets, set) {
-  set.set   = sets[set.baseSet].set.set
-  set.error = sets[set.baseSet].set.error
-}
-
-export default function (sets, dispatcher) {
+export default function (sets, setFn, subsetFn) {
   var keys = Object.keys(sets)
-  var [baseSets, subSets] = filterSplit(keys, isBaseSet(sets))
+  var [baseSets, subSets] = split(keys, isBaseSet(sets))
 
-  baseSets.forEach(set => sets[set] = new ObserverSet(sets[set], dispatcher))
-
-  subSets.forEach(set => {
-    let _set      = sets[set],
-        baseEvent = sets[_set.baseSet].events // uses baseSet events
-    setStoreOfSubset(sets, _set)
-    sets[set] = new ObserverSubset(_set, dispatcher, baseEvent)
-  })
+  baseSets.forEach(set => sets[set] = setFn(sets[set]))
+  subSets.forEach(set  => sets[set] = subsetFn(sets[set], sets[sets[set].baseSet]))
 
   return sets
 }

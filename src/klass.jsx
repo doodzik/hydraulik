@@ -1,6 +1,6 @@
 import ObserverSet    from './observerSet'
 import ObserverSubset from './observerSubset'
-import build          from './klassBuilder'
+import build          from './klassBuilderObserver'
 import { Dispatcher } from 'flux'
 
 export default class Klass {
